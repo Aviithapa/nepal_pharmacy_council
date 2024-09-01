@@ -169,6 +169,7 @@ class HomeController extends BaseController
             }
             return view('website.pages.' . $slug,  $this->viewData);
         }
+        dd('you are here');
         return view('website.pages.404');
     }
 
