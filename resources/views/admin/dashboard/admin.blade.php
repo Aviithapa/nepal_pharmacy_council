@@ -209,7 +209,7 @@
             let value = $('#' + fieldId).val();
             
             $.ajax({
-                url: '{{ route("count.store") }}', // Update this to the correct route
+                url: 'https://nepalpharmacycouncil.org.np/cms/count', // Update this to the correct route
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}', // CSRF token for security
@@ -243,7 +243,7 @@
             var checked = $(this).prop('checked');
 
             $.ajax({
-                url: '/cms/setting/',
+                url: 'https://nepalpharmacycouncil.org.np/cms/setting/',
                 method: 'POST', // Use POST method
                 data: {
                     _token: '{{ csrf_token() }}', // Include CSRF token for security
