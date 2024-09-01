@@ -45,7 +45,7 @@
                     alt="{{ $registrar->title }}"
                   />
                   <h3>{{ $registrar->title }}</h3>
-                  <p>Registar</p>
+                  <p>Registrar</p>
                 </div>
               </div>
               <div class="npc_board_other_members">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="npc_card_content">
                       <h3>{{ $member->title }}</h3>
-                      <p>Members</p>
+                      <p>Member</p>
                     </div>
                   </div>
                 @endforeach
