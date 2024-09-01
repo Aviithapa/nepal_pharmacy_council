@@ -243,7 +243,7 @@
             var checked = $(this).prop('checked');
 
             $.ajax({
-                url: 'https://nepalpharmacycouncil.org.np/cms/setting/',
+                url: 'https://nepalpharmacycouncil.org.np/cms/setting',
                 method: 'POST', // Use POST method
                 data: {
                     _token: '{{ csrf_token() }}', // Include CSRF token for security
