@@ -113,6 +113,7 @@
             <nav class="npc__dropdown-links flex flex-col">
               <a href="{{ url("institutions") }}" class="">Diploma Colleges</a>
               <a href="{{ url("bachelor") }}" class="">NPC Registered Bachelor Colleges</a>
+              <a href="{{ url("foreign") }}" class="">Foreign Colleges</a>
             </nav>
           </div>
         </div>

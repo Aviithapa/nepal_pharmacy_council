@@ -19,18 +19,18 @@
               </a>
               <a
                 href="{{ url('bachelor') }}"
-                class="npc_sidebar_button active"
+                class="npc_sidebar_button"
                 data-target="npc_reg_bachelor"
               >
               NPC Registered Bachelor Colleges
               </a>
               <a
-              href="{{ url('foreign') }}"
-              class="npc_sidebar_button"
-              data-target="npc_reg_bachelor"
-            >
-            Foreign Colleges
-            </a>
+                href="{{ url('foreign') }}"
+                class="npc_sidebar_button active"
+                data-target="npc_reg_bachelor"
+              >
+              Foreign Colleges
+              </a>
             </div>
           </div>
 

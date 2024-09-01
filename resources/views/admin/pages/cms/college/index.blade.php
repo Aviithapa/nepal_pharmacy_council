@@ -50,7 +50,8 @@
                                                                         <select class="form-select mb-3" name="type">
                                                                             <option>Please Select Level</option>
                                                                             <option value="diploma">Diploma</option>
-                                                                            <option value="bachelor">Bechelor</option>
+                                                                            <option value="bachelor">Bachelor</option>
+                                                                            <option value="foreign">Foreign</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>

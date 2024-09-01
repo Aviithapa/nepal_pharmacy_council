@@ -97,6 +97,10 @@ class HomeController extends BaseController
                     $this->viewData['bachelor'] = $this->collegeRepository->all()->where('type', 'bachelor');
                     break;
 
+                    case 'foreign':
+                        $this->viewData['bachelor'] = $this->collegeRepository->all()->where('type', 'foreign');
+                        break;
+
                 case 'requirement-diploma':
                     $this->viewData['diploma_req'] = $this->postRepository->findOrFail(53);
                     break;

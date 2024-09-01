@@ -24,6 +24,13 @@
               >
                 NPC Registered Bachelor Colleges
               </a>
+              <a
+              href="{{ url('foreign') }}"
+              class="npc_sidebar_button"
+              data-target="npc_reg_bachelor"
+            >
+            Foreign Colleges
+            </a>
             </div>
           </div>
 
