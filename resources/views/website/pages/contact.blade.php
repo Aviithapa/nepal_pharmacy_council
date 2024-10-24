@@ -22,15 +22,8 @@
         </p>
       </div>
       <div class="npc_contact_right">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14759.747757876043!2d85.34483255250703!3d27.671067403145898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1724817468128!5m2!1sen!2snp"
-          width="100%"
-          height="auto"
-          style="border: 0"
-          allowfullscreen="true"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+        <iframe src="{{ getSiteSetting('social_google') }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
       </div>
     </div>
   </div>
