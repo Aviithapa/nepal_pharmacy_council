@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin\CMS;
 use App\Client\FileUpload\FileUploaderInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\News\CreateNewsRequest;
+use App\Imports\ResultUploadImport;
 use App\Repositories\Media\MediaRepository;
 use App\Repositories\News\NewsRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NewsController extends Controller
 {
@@ -236,6 +238,25 @@ class NewsController extends Controller
             }
             session()->flash('success', 'Media has been deleted successfully.');
             return redirect()->back();
+        } catch (Exception $e) {
+            session()->flash('danger', 'Oops! Something went wrong.' . $e);
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function uploadResult(Request $request)
+    {
+        try {
+            $request->validate([
+                'file' => 'required|mimes:xlsx,xls,csv',
+                'exam' => 'required|string',
+                'level' => 'required|string|in:pharmacist,pharmacy assistant',
+            ]);
+    
+            // Import the Excel file
+            Excel::import(new ResultUploadImport($request->exam, $request->level), $request->file('file'));
+    
+            return redirect()->back()->with('success', 'Results uploaded successfully.');
         } catch (Exception $e) {
             session()->flash('danger', 'Oops! Something went wrong.' . $e);
             return redirect()->back()->withInput();

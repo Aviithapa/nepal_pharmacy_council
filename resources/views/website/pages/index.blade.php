@@ -3,18 +3,19 @@
 @section('content')
 
 <div class="npc__notice-modal-container fixed" id="notice-modal">
-  <div class="npc__notice-container">
-    <div class="notice-container" id="notice-container"></div>
+  <div class="npc__notice-container" style="position: relative; padding: 20px;">
+    <!-- Scrollable content container -->
+    <div class="notice-container" id="notice-container" style="overflow-y: auto; max-height: 90vh;"></div>
+    
+    <!-- Close button -->
     <div class="npc__notice-close" id="close-notice">
-      <span class="flex items-center justify-center">
+      <span class="flex items-center justify-center" style="z-index: 1000">
         <i class="fa-solid fa-xmark"></i>
       </span>
     </div>
-    <div class="npc__notice-next" id="notice-next">
-      <button>Next</button>
-    </div>
   </div>
 </div>
+
 
 <div class="background-overlay" id="overlay"></div>
 <div class="reg-modal-container" id="reg-modal" data-visible="true">
@@ -332,73 +333,61 @@
 
 @push('scripts')
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const data = @json($mediaItems);
-    const noticeModal = document.getElementById("notice-modal");
-    const nextNotice = document.getElementById("notice-next");
-    if (data.length === 0) {
-      noticeModal.style.display = "none";
-      return;
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  const noticeModal = document.getElementById("notice-modal");
+  const closeNotice = document.getElementById("close-notice");
+  const noticeContainer = document.getElementById("notice-container");
 
-    let currentPosition = 0;
+  const data = @json($mediaItems); // Your media items
 
-    const closeNotice = document.getElementById("close-notice");
-    const noticeContainer = document.getElementById("notice-container");
-    function addNotice(index) {
-      if (data[index].type === "pdf") {
-        noticeContainer.innerHTML = "";
+  if (data.length === 0) {
+    noticeModal.style.display = "none"; // Hide the modal if no data
+    return;
+  }
 
-        // Create the embed element
+  // Function to populate notices
+  function addNotices() {
+    noticeContainer.innerHTML = ""; // Clear any existing content
+    closeNotice.style.display = "block"
+    data.forEach((item) => {
+      if (item.type === "pdf") {
         const embed = document.createElement("embed");
-        embed.src = data[index].file; // Path to your PDF file
+        embed.src = item.file; // Path to the PDF file
         embed.type = "application/pdf";
         embed.width = "100%";
         embed.height = "842px";
+        embed.style.marginBottom = "20px";
 
-        // Append the embed element to the container
         noticeContainer.appendChild(embed);
-        return;
-      }
-      noticeContainer.innerHTML = "";
-      // Create the div container element
-      const imgContainer = document.createElement("div");
-      imgContainer.className = "npc__notice-img-container";
-
-      // Create the image element
-      const imgElement = document.createElement("img");
-      imgElement.src = data[index].file;
-      imgElement.alt = "";
-
-      // Append the image to the container
-      imgContainer.appendChild(imgElement);
-      noticeContainer.appendChild(imgContainer);
-    }
-
-    addNotice(currentPosition);
-
-    closeNotice.addEventListener("click", () => {
-      noticeModal.style.display = "none";
-      currentPosition = 0;
-    });
-
-    nextNotice.addEventListener("click", () => {
-      currentPosition++;
-      addNotice(currentPosition);
-      showButton();
-    });
-
-    function showButton() {
-      if (currentPosition === data.length - 1) {
-        closeNotice.style.display = "block";
-        nextNotice.style.display = "none";
       } else {
-        closeNotice.style.display = "none";
-        nextNotice.style.display = "block";
-      }
-    }
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "npc__notice-img-container";
+        imgContainer.style.marginBottom = "20px";
 
-    showButton();
+        const imgElement = document.createElement("img");
+        imgElement.src = item.file;
+        imgElement.alt = "";
+        imgElement.style.width = "100%";
+        imgElement.style.height = "auto";
+
+        imgContainer.appendChild(imgElement);
+        noticeContainer.appendChild(imgContainer);
+      }
+    });
+  }
+
+  addNotices(); // Populate notices on page load
+
+  // Close modal on clicking close button
+  closeNotice.addEventListener("click", () => {
+    noticeModal.style.display = "none";
   });
+
+  // Scrollable container for overflowing content
+  noticeContainer.style.overflowY = "auto";
+  noticeContainer.style.maxHeight = "90vh";
+});
+
+
 </script>
 @endpush

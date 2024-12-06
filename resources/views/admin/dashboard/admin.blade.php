@@ -191,6 +191,79 @@
                                     </div>
                                 </div>
                             </div> 
+
+                            <div class="col-xxl-12 col-sm-12">
+                                <div class="card widget-flat text-white">
+                                    <div class="card-body">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="header-title">
+                                                    Upload Result
+                                                </h4>
+                                                <p class="text-muted mb-0">
+                                                </p>
+                                            </div>
+                                            <div class="card-body">
+                                                <form method="POST" action="{{ route('upload.result') }}" enctype="multipart/form-data">
+                                                    @csrf
+                                
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                                            <label class="form-label" for="exam">Exam:</label>
+                                                            <input
+                                                                type="text"
+                                                                name="exam"
+                                                                id="exam"
+                                                                class="form-control @error('exam') is-invalid @enderror"
+                                                                placeholder="Enter Exam"
+                                                                required
+                                                            />
+                                                            @error('exam')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                                            <label class="form-label" for="level">Level:</label>
+                                                            <select
+                                                                name="level"
+                                                                id="level"
+                                                                class="form-select @error('level') is-invalid @enderror"
+                                                                required
+                                                            >
+                                                                <option value="" disabled selected>Select Level</option>
+                                                                <option value="pharmacist">Pharmacist</option>
+                                                                <option value="pharmacy assistant">Pharmacy Assistant</option>
+                                                            </select>
+                                                            @error('level')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror
+                                                        </div>
+                            
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group mb-3">
+                                                                <label class="form-label" for="inputFile">Select File:</label>
+                                                                <input
+                                                                type="file"
+                                                                name="file" id="inputFile"
+                                                                multiple
+                                                                class="form-control @error('file') is-invalid @enderror"/>
+                                                            </div>
+                                                        </div>
+                                
+                                                    </div>
+                                                    <button class="btn btn-primary" type="submit">Upload Result</button>
+                                                </form>
+                                
+                                            </div> <!-- end card-body-->
+                                        </div> <!-- end card-->
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
 
                         

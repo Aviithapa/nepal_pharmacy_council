@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\Inquiry\CreateInquiryRequest;
+use App\Models\ResultUpload;
 use App\Repositories\CMS\Post\PostRepository;
 use App\Repositories\College\CollegeRepository;
 use App\Repositories\Contact\ContactRepository;
@@ -248,4 +249,29 @@ class HomeController extends BaseController
             return redirect()->back()->withInput();
         }
     }
+
+    public function check(Request $request)
+    {
+        $request->validate([
+            'roll_number' => [
+                'required', 
+                'string', 
+                'exists:result_uploads,roll_number', // Check if the roll number exists in the database
+            ],
+        ], [
+            'roll_number.required' => 'The roll number field is required.',
+            'roll_number.string' => 'The roll number must be a valid string.',
+            'roll_number.exists' => 'The entered roll number does not exist in our records.',
+        ]);
+
+        $rollNumber = $request->input('roll_number');
+        $this->viewData['result'] = $result = ResultUpload::where('roll_number', $rollNumber)->first();
+        if (!$result) {
+            return redirect()->back()->with('error', 'Result not found for the provided roll number!');
+        }
+
+        return view('website.pages.result',  $this->viewData);
+
+     }
+
 }

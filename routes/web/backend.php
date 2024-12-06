@@ -48,6 +48,7 @@ Route::delete('mediaDestroy/{media}', [NewsController::class, 'mediaDestroy'])->
 Route::put('updateMessage/{post}', [PostController::class, 'updateMessage'])->middleware(['auth'])->name('update.message');
 
 
+Route::post('uploadResult', [NewsController::class, 'uploadResult'])->middleware(['auth'])->name('upload.result');
 
 
 

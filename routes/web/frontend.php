@@ -10,5 +10,5 @@ Route::get('news-details/{id}', [HomeController::class, 'getSingleNews'])->name(
 Route::post('subscribe-newsletter', [HomeController::class, 'subscribeNewsLetter'])->name('subscribe.news-letter');
 Route::post('contact', [HomeController::class, 'storeContactUsForm'])->name('contact');
 
-
+Route::post('/check-result', [HomeController::class, 'check'])->name('result.check');
 Route::match(['get', 'post'], '/{slug}', [HomeController::class, 'slug'])->where('slug', '.*');

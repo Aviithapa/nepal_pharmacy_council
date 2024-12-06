@@ -182,6 +182,11 @@
         <div class="npc__nav-item">
           <a class="npc__nav-btn inline-block" href="{{ url('gallary') }}">Gallery</a>
         </div>
+
+        <div class="npc__nav-item">
+          <a class="npc__nav-btn inline-block" href="{{ url('result') }}">Result</a>
+        </div>
+       
       </nav>
     </div>
   </div>
@@ -308,6 +313,10 @@
   <div class="npc__mob-nav-link">
     <a class="npc__mob-nav-item" href="/cpd-activities">Cpd Activities</a>
   </div>
+  <div class="npc__mob-nav-link">
+    <a class="npc__mob-nav-item" href="/result">Result</a>
+  </div>
+
 
       <!-- drop down link  -->
       
