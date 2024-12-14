@@ -104,7 +104,7 @@
             <!-- Sidebar -left -->
             <div class="h-100" id="leftside-menu-container" data-simplebar style="border-top: 1px solid;">
                 <!--- Sidemenu -->
-                <ul class="side-nav">
+                <ul class="side-nav" style="margin-bottom: 100px;">
 
                     {{-- <li class="side-nav-title">Main</li> --}}
 
