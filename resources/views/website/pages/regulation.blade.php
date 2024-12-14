@@ -34,7 +34,23 @@
 
             <!-- regulation section -->
 
-            <div id="npc_regulation" class="npc_content_wrapper active">
+            <section>
+              <div class="npc_syllabus_wrapper">
+              <div class="npc_syllabus">
+                  <div class="npc_syllabus_card">
+                      @foreach ($regulation as $da)
+                          <div class="npc_syllabus_item">
+                              <span class="npc_syllabus_item_title">{{ $da->title }}</span>
+                              <a href="{{ $da->getImageUrlAttribute() }}" target="_blank" class="npc_syllabus_download_button">Download</a>
+                          </div>
+                      @endforeach
+                  
+                  </div>
+              </div>
+              </div>
+            </section>
+
+            {{-- <div id="npc_regulation" class="npc_content_wrapper active">
               <div class="npc_regulation_content">
                 <div class="npc_pdf_container">
                     <embed
@@ -53,7 +69,7 @@
                   />
                 </div>
               </div>
-            </div>
+            </div> --}}
              
           </div>
         </div>

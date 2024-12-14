@@ -30,18 +30,22 @@
         <!-- content area section -->
         <div class="npc_content_area_wrapper">
           <div class="npc_content">
-            <div id="npc_code_of_conduct" class="npc_content_wrapper active">
-              <div class="npc_code_of_conduct_content">
-                <div class="npc_pdf_container">
-                    <embed
-                    src="{{ $code_of_conduct->getImageUrlAttribute() }}"
-                    type="application/pdf"
-                    width="100%"
-                    height="842"
-                  />
-                </div>
+            <section>
+              <div class="npc_syllabus_wrapper">
+              <div class="npc_syllabus">
+                  <div class="npc_syllabus_card">
+                      @foreach ($code_of_conduct as $da)
+                          <div class="npc_syllabus_item">
+                              <span class="npc_syllabus_item_title">{{ $da->title }}</span>
+                              <a href="{{ $da->getImageUrlAttribute() }}" target="_blank" class="npc_syllabus_download_button">Download</a>
+                          </div>
+                      @endforeach
+                  
+                  </div>
               </div>
-            </div>
+              </div>
+            </section>
+            
           </div>
         </div>
       </div>

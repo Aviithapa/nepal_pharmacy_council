@@ -170,6 +170,27 @@
                     </li>
 
                     <li class="side-nav-item">
+                        <a href="{{ url('cms/guidelines') }}" class="side-nav-link">
+                            <i class="bi-printer"></i>
+                            <span>Guidelines Management</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{ url('cms/regulations') }}" class="side-nav-link">
+                            <i class="bi-printer"></i>
+                            <span>Regulation Management</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{ url('cms/coc') }}" class="side-nav-link">
+                            <i class="bi-printer"></i>
+                            <span>COC Management</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
                         <a href="{{ url('cms/gallery') }}" class="side-nav-link">
                             <i class="bi-image"></i>
                             <span> Gallery Management </span>

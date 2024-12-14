@@ -31,11 +31,26 @@
         <div class="npc_content_area_wrapper">
           <div class="npc_content">
    
+            <section>
+              <div class="npc_syllabus_wrapper">
+              <div class="npc_syllabus">
+                  <div class="npc_syllabus_card">
+                      @foreach ($guidelines as $da)
+                          <div class="npc_syllabus_item">
+                              <span class="npc_syllabus_item_title">{{ $da->title }}</span>
+                              <a href="{{ $da->getImageUrlAttribute() }}" target="_blank" class="npc_syllabus_download_button">Download</a>
+                          </div>
+                      @endforeach
+                  
+                  </div>
+              </div>
+              </div>
+            </section>
 
         
             <!-- guideline section -->
 
-            <div id="npc_guideline" class="npc_content_wrapper active">
+            {{-- <div id="npc_guideline" class="npc_content_wrapper active">
               <div class="npc_guideline_content">
                 <div class="npc_pdf_container">
                     <embed
@@ -47,7 +62,7 @@
                 </div>
                 
               </div>
-            </div>
+            </div> --}}
 
            
           </div>

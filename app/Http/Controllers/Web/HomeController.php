@@ -115,15 +115,16 @@ class HomeController extends BaseController
                     break;
                 
                 case 'regulation':
-                    $this->viewData['regulation'] = $this->postRepository->findOrFail(56);
+                    $this->viewData['regulation'] = $this->postRepository->all()->where('type', 'regulations');
                     break;
 
                 case 'guidelines':
-                    $this->viewData['guidelines'] = $this->postRepository->findOrFail(59);
+                    $this->viewData['guidelines'] = $this->postRepository->all()->where('type', 'guidelines');
                     break;
                 
                 case 'code-of-conduct':
-                    $this->viewData['code_of_conduct'] = $this->postRepository->findOrFail(61);
+                    $this->viewData['code_of_conduct'] = $this->postRepository->all()->where('type', 'code-of-conduct');
+
                     break;
 
                 case 'cpd-activities': 

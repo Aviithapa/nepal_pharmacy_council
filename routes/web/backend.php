@@ -4,14 +4,17 @@
 
 use App\Http\Controllers\Admin\CMS\BannerController;
 use App\Http\Controllers\Admin\CMS\BODController;
+use App\Http\Controllers\Admin\CMS\CodeOfConductController;
 use App\Http\Controllers\Admin\CMS\CollegeController;
 use App\Http\Controllers\Admin\CMS\CpdActivitesController;
 use App\Http\Controllers\Admin\CMS\GalleryController;
+use App\Http\Controllers\Admin\CMS\GuidelinesController;
 use App\Http\Controllers\Admin\CMS\MenuController;
 use App\Http\Controllers\Admin\CMS\NewsController;
 use App\Http\Controllers\Admin\CMS\PageController;
 use App\Http\Controllers\Admin\CMS\PostController;
 use App\Http\Controllers\Admin\CMS\PublicationController;
+use App\Http\Controllers\Admin\CMS\RegulationsController;
 use App\Http\Controllers\Admin\CMS\SettingController;
 use App\Http\Controllers\Admin\CMS\StaffController;
 use App\Http\Controllers\Admin\CMS\SyllabusController;
@@ -40,7 +43,9 @@ Route::resource('cms/cpd', CpdActivitesController::class)->middleware(['auth'])-
 Route::resource('cms/syllabus', SyllabusController::class)->middleware(['auth'])->only('index','store','destroy');
 Route::resource('cms/setting', SettingController::class)->middleware(['auth'])->only('store');
 Route::resource('cms/publication', PublicationController::class)->middleware(['auth'])->only('index','store','destroy');
-
+Route::resource('cms/guidelines', GuidelinesController::class)->middleware(['auth'])->only('index','store','destroy');
+Route::resource('cms/regulations', RegulationsController::class)->middleware(['auth'])->only('index','store','destroy');
+Route::resource('cms/coc', CodeOfConductController::class)->middleware(['auth'])->only('index','store','destroy');
 
 Route::resource('inquiry', InquiryController::class)->middleware(['auth'])->only('index');
 Route::post('quickNews', [NewsController::class, 'storeQuickNews'])->middleware(['auth'])->name('quick.news');
