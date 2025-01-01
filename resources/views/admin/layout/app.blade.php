@@ -20,6 +20,9 @@
             @case('admin')
                 @include('admin.sidebar.sidebar')
             @break
+            @case('noc_user')
+                @include('admin.sidebar.noc')
+            @break
             @default
                 @include('admin.sidebar.default')
         @endswitch

@@ -1518,3 +1518,231 @@ footer {
   a {
   color: #fff;
 }
+
+input[type="text"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #555;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+select {
+  width: 100% !important;
+  padding: 10px !important;
+  margin-top: 5px !important;
+  margin-bottom: 15px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #555;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+input:focus,
+select:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 86, 179, 0.2);
+}
+
+.qualification-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.qualification-table th {
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.qualification-table td {
+  padding: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.qualification-table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.qualification-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.qualification-table input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.qualification-table input[type="text"]:focus {
+  border-color: #d71a47;
+  outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-heading {
+    font-size: 18px;
+  }
+
+  .qualification-table thead {
+    display: none;
+  }
+
+  .qualification-table tbody,
+  .qualification-table tr,
+  .qualification-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .qualification-table td {
+    padding: 10px;
+    text-align: right;
+    position: relative;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .qualification-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  .qualification-table td[data-label="Remarks"] {
+    border-bottom: none;
+  }
+
+  .qualification-table input[type="text"] {
+    margin-top: 5px;
+  }
+}
+
+/* Document Grid */
+.document-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Adjust column size */
+  gap: 20px;
+  justify-items: center;
+}
+
+.document-item {
+  /* text-align: center; */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* .document-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+} */
+
+.document-item img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.document-item p {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.document-item input[type="file"] {
+  font-size: 14px;
+  padding: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .document-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    gap: 15px; /* Reduce gap for smaller screens */
+  }
+
+  .document-item img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .document-item p {
+    font-size: 13px;
+  }
+
+  .document-item input[type="file"] {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .document-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 column on smaller tablets */
+  }
+
+  .document-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .document-item p {
+    font-size: 12px;
+  }
+
+  .document-item input[type="file"] {
+    font-size: 11px;
+  }
+}
+
+.radio-input {
+  appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid #d1d5db; /* Gray-300 */
+  border-radius: 50%; /* Makes it rounded */
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#newButtonContainer a {
+  animation: blink 1s linear infinite;
+}
+
+.text-red-500 {
+  color: red;
+}
+
+.success {
+  background-color: lightgreen;
+  padding: 10px;
+}

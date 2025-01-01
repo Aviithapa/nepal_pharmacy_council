@@ -177,3 +177,57 @@
       });
     });
   </script>
+
+<script src="{{asset('backend/assets/js/vendor.min.js') }}"></script>
+<script src="{{asset('backend/assets/js/app.min.js') }}"></script>
+
+
+@if(session('success'))
+<script>
+    $.toast({
+        heading: 'Success',
+        text: '{{ session('success') }}',
+        position: 'top-right',
+        loader: false,
+        bgColor: '#28a745',
+    });
+</script>
+@endif
+
+@if(session('warning'))
+<script>
+    $.toast({
+        heading: 'Warning',
+        text: '{{ session('warning') }}',
+        position: 'top-right',
+        loader: false,
+        bgColor: '#99cc33',
+    });
+</script>
+@endif
+
+
+@if(session('danger'))
+<script>
+    $.toast({
+        heading: 'Error',
+        text: '{{ session('danger') }}',
+        position: 'top-right',
+        loader: false,
+        bgColor: 'red',
+    });
+</script>
+@endif
+
+
+@if(session('error'))
+<script>
+    $.toast({
+        heading: 'Error',
+        text: '{{ session('error') }}',
+        position: 'top-right',
+        loader: false,
+        bgColor: 'red',
+    });
+</script>
+@endif

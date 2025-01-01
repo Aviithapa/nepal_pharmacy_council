@@ -116,6 +116,13 @@
                     </li>
 
                     <li class="side-nav-item">
+                        <a href="{{ url('cms/noc-main') }}" class="side-nav-link">
+                            <i class="bi-gear"></i>
+                            <span> Noc Management </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
                         <a href="{{ route('dashboard.site-settings.index') }}" class="side-nav-link">
                             <i class="bi-gear"></i>
                             <span> Site Settings </span>

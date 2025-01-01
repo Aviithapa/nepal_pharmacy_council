@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CMS\GalleryController;
 use App\Http\Controllers\Admin\CMS\GuidelinesController;
 use App\Http\Controllers\Admin\CMS\MenuController;
 use App\Http\Controllers\Admin\CMS\NewsController;
+use App\Http\Controllers\Admin\CMS\NocController as CMSNocController;
 use App\Http\Controllers\Admin\CMS\PageController;
 use App\Http\Controllers\Admin\CMS\PostController;
 use App\Http\Controllers\Admin\CMS\PublicationController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Admin\Count\CountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Inquiry\InquiryController;
+use App\Http\Controllers\Admin\NOC\NOCController;
 use App\Http\Controllers\Admin\Settings\SiteSettingController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -29,32 +31,33 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::resource('dashboard/user', UserController::class)->middleware(['auth']);
 
 // CMS 
-Route::resource('cms/menu', MenuController::class)->middleware(['auth']);
-Route::resource('cms/post', PostController::class)->middleware(['auth']);
-Route::resource('cms/news', NewsController::class)->middleware(['auth']);
-Route::resource('cms/banner', BannerController::class)->middleware(['auth']);
-Route::resource('cms/gallery', GalleryController::class)->middleware(['auth']);
-Route::resource('cms/page', PageController::class)->middleware(['auth']);
-Route::resource('cms/staff', StaffController::class)->middleware(['auth']);
-Route::resource('cms/count', CountController::class)->middleware(['auth']);
-Route::resource('cms/bod', BODController::class)->middleware(['auth']);
-Route::resource('cms/college', CollegeController::class)->middleware(['auth'])->only('index','store','destroy');
-Route::resource('cms/cpd', CpdActivitesController::class)->middleware(['auth'])->only('index','store','destroy');
-Route::resource('cms/syllabus', SyllabusController::class)->middleware(['auth'])->only('index','store','destroy');
-Route::resource('cms/setting', SettingController::class)->middleware(['auth'])->only('store');
-Route::resource('cms/publication', PublicationController::class)->middleware(['auth'])->only('index','store','destroy');
-Route::resource('cms/guidelines', GuidelinesController::class)->middleware(['auth'])->only('index','store','destroy');
-Route::resource('cms/regulations', RegulationsController::class)->middleware(['auth'])->only('index','store','destroy');
-Route::resource('cms/coc', CodeOfConductController::class)->middleware(['auth'])->only('index','store','destroy');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('cms/menu', MenuController::class);
+    Route::resource('cms/post', PostController::class);
+    Route::resource('cms/news', NewsController::class);
+    Route::resource('cms/banner', BannerController::class);
+    Route::resource('cms/gallery', GalleryController::class);
+    Route::resource('cms/page', PageController::class);
+    Route::resource('cms/staff', StaffController::class);
+    Route::resource('cms/count', CountController::class);
+    Route::resource('cms/bod', BODController::class);
+    Route::resource('cms/college', CollegeController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/cpd', CpdActivitesController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/syllabus', SyllabusController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/setting', SettingController::class)->only('store');
+    Route::resource('cms/publication', PublicationController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/guidelines', GuidelinesController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/regulations', RegulationsController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/coc', CodeOfConductController::class)->only('index', 'store', 'destroy');
+    Route::resource('cms/noc-main', CMSNocController::class)->only('index', 'show', 'update');
+    Route::put('cms/noc-approve/{id}', [CMSNocController::class, 'approve'])->name('noc.approve');
 
-Route::resource('inquiry', InquiryController::class)->middleware(['auth'])->only('index');
-Route::post('quickNews', [NewsController::class, 'storeQuickNews'])->middleware(['auth'])->name('quick.news');
-Route::delete('mediaDestroy/{media}', [NewsController::class, 'mediaDestroy'])->middleware(['auth'])->name('media.destroy');
-Route::put('updateMessage/{post}', [PostController::class, 'updateMessage'])->middleware(['auth'])->name('update.message');
-
-
-Route::post('uploadResult', [NewsController::class, 'uploadResult'])->middleware(['auth'])->name('upload.result');
-
+    Route::resource('inquiry', InquiryController::class)->only('index');
+    Route::post('quickNews', [NewsController::class, 'storeQuickNews'])->name('quick.news');
+    Route::delete('mediaDestroy/{media}', [NewsController::class, 'mediaDestroy'])->name('media.destroy');
+    Route::put('updateMessage/{post}', [PostController::class, 'updateMessage'])->name('update.message');
+    Route::post('uploadResult', [NewsController::class, 'uploadResult'])->name('upload.result');
+});
 
 
 
@@ -69,3 +72,6 @@ Route::resource('site-settings', SiteSettingController::class, [
         'destroy' => 'dashboard.site-settings.destroy',
     ]
 ]);
+
+//NOC
+Route::resource('backend/noc', NOCController::class)->middleware(['auth']);
