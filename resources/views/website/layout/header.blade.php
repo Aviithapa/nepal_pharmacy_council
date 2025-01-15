@@ -179,9 +179,9 @@
           <a class="npc__nav-btn inline-block" href="{{ url('cpd-activities') }}">CPD Activities</a>
         </div>
 
-        <div class="npc__nav-item">
+        {{-- <div class="npc__nav-item">
           <a class="npc__nav-btn inline-block" href="{{ url('noc-online') }}">NOC</a>
-        </div>
+        </div> --}}
 
         <div class="npc__nav-item">
           <a class="npc__nav-btn inline-block" href="{{ url('result') }}">Result</a>
@@ -313,9 +313,9 @@
   <div class="npc__mob-nav-link">
     <a class="npc__mob-nav-item" href="/cpd-activities">Cpd Activities</a>
   </div>
-  <div class="npc__mob-nav-link">
+  {{-- <div class="npc__mob-nav-link">
     <a class="npc__mob-nav-item" href="/noc-online">NOC</a>
-  </div>
+  </div> --}}
   <div class="npc__mob-nav-link">
     <a class="npc__mob-nav-item" href="/result">Result</a>
   </div>

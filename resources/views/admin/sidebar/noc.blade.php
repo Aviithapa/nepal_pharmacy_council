@@ -92,6 +92,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item">
+                <a href="{{ url('backend/good-standing') }}" class="side-nav-link">
+                    <i class="bi-book"></i>
+                    <span> Good Standing </span>
+                </a>
+            </li>
+
             
         </ul>
         <!--- End Sidemenu -->

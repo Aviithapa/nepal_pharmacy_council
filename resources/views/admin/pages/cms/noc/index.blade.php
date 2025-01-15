@@ -38,6 +38,15 @@
                     </select>
                 </div>
             </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="mb-3">
+                    <select class="form-control" id="statusSelect" name="good_standing">
+                        <option value="" {{ request()->get('good_standing') === null ? 'selected' : '' }}>Select Type</option>
+                        <option value="1" {{ request()->get('good_standing') == 1 ? 'selected' : '' }}>Good Standing</option>
+                        <option value="0" {{ request()->get('good_standing') == 0 ? 'selected' : '' }}>NOC</option>
+                     </select>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="validationCustom01" placeholder="Citizenship" name="citizenship" value="{{ request()->get('citizenship') }}">
@@ -70,6 +79,8 @@
                                     <th>Action</th>
                                     <th>Name</th>
                                     <th>NPC Enlisted</th>
+                                    <th>Type</th>
+
                                     <th>Dob</th>
                                     <th>Citizenship</th>
                                     <th>Phone Number</th>
@@ -81,18 +92,26 @@
                                 <tr>
                                     <td>{{ $data->id }}</td>
                                     <td>
-                                        <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
-                                            <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
-                                        </a>
-                                        <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
-                                            <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Approve</span>
-                                        </a>
-                                        <a class="btn-reject" data-id="{{ $data->id }}" data-status="rejected" style="cursor: pointer;">
-                                            <span class="badge bg-danger-subtle text-danger" style="font-size: 18px; text-transform: capitalize;">Reject</span>
-                                        </a>
+                                        @if ($data->status === 'approved')
+                                            <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
+                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
+                                            </a>
+                                            
+                                        @else
+                                            <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
+                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
+                                            </a>
+                                            <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Approve</span>
+                                            </a>
+                                            <a class="btn-reject" data-id="{{ $data->id }}" data-status="rejected" style="cursor: pointer;">
+                                                <span class="badge bg-danger-subtle text-danger" style="font-size: 18px; text-transform: capitalize;">Reject</span>
+                                            </a>
+                                        @endif
                                     </td>
                                     <td>{{ $data->title . ' ' . $data->first_name . ' ' . $data->middle_name . ' ' . $data->last_name }}</td>
                                     <td>{{ $data->npc_enlisted }}</td>
+                                    <td><span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">{{ $data->good_standing ? 'Good Standing' : 'NOC' }}</span></td>
                                     <td>{{ $data->dob_ad . ' AD ' . $data->dob_bs . ' BS' }}</td>
                                     <td>{{ $data->citizenship }}</td>
                                     <td>{{ $data->user->email }}</td>

@@ -16,7 +16,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <div class="" style="padding: 15px; background: lightyellow; margin: 10px 0px; border-left: 4px solid yellow;">
-  <p style="font-weight: 700; font-size:26px; color: black;">NOC Certificate Form</p>
+  <p style="font-weight: 700; font-size:26px; color: black;">Good Standing Letter.</p>
 
   Make sure you associate with correct details. Once the information is confirmed, it cannot be changed.
 </div>
@@ -29,12 +29,12 @@
     </div>
     @elseif ($data->status === 'approved')
     <div style="padding: 15px; background: lightgreen; margin: 10px 0px; border-left: 4px solid green;">
-        <p style="font-weight: 700; font-size: 26px; color: black;">Your NOC has been approved and generated.</p>
-        <p>Please click here to download your NOC. <a href="{{ getImage($data->pdf_link) }}" target="_blank" class="blink" style="color: blue;">Download Now </a></p>
+        <p style="font-weight: 700; font-size: 26px; color: black;">Your Good Standing has been approved and generated.</p>
+        <p>Please click here to download your good standing letter. <a href="{{ getImage($data->pdf_link) }}" target="_blank" class="blink" style="color: blue;">Download Now </a></p>
     </div>
     @elseif ($data->status === 'rejected')
     <div style="padding: 15px; background: rgb(255, 185, 185); margin: 10px 0px; border-left: 4px solid red;">
-        <p style="font-weight: 700; font-size: 26px; color: black;">Your NOC has been rejected.</p>
+        <p style="font-weight: 700; font-size: 26px; color: black;">Your  Good Standing has been rejected.</p>
         <p>{{ $data->remarks }}</p>
     </div>
     @endif
@@ -42,13 +42,13 @@
 
 @if(isset($data))
 <form 
-action="{{ route('noc.update', ['noc' => $data->id ]) }}"
+action="{{ route('good-standing.update', ['good_standing' => $data->id ]) }}"
 enctype="multipart/form-data"
  method="POST" class="gap-2  py-12" style=" background: white; padding: 10px;">
  @method('PUT')
 @else
 <form 
-action="{{ route('noc.store') }}"
+action="{{ route('good-standing.store') }}"
 enctype="multipart/form-data"
  method="POST" class="gap-2  py-12" style=" background: white; padding: 10px;">
  @endif
@@ -59,7 +59,7 @@ enctype="multipart/form-data"
             Personal Information
         </h2>
         <div class="col-span-1">
-            <label for="firstNameNepali">देवनागरी मा पहिलो नाम            </label>
+            <label for="firstNameNepali">देवनागरी मा पहिलो नाम </label>
             <input 
                 type="text" 
                 name="first_name_nepali" 
@@ -290,7 +290,7 @@ enctype="multipart/form-data"
         
             <!-- National ID -->
             <div class="col-span-2">
-                <label for="national_id">National ID No</label>
+                <label for="national_id">Password No*</label>
                 <input 
                     type="text" 
                     name="national_id" 
@@ -522,6 +522,74 @@ enctype="multipart/form-data"
               @enderror
             </td>
           </tr>
+          <tr>
+            <td>3</td>
+            <td>Bachelor or Equivalent</td>
+            <td>
+              <input 
+                  type="text" 
+                  placeholder="Enter institute" 
+                  name="bachelor_institute" 
+                  value="{{ old('bachelor_institute', isset($data) ? $data->bachelor_institute : '') }}" 
+                  {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' }} 
+                   
+              >
+              @error('bachelor_institute')
+                  <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </td>
+            <td>
+              <input 
+                  type="text" 
+                  placeholder="Year" 
+                  name="bachelor_year" 
+                  value="{{ old('bachelor_year', isset($data) ? $data->bachelor_year : '') }}" 
+                  {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' }} 
+                   
+              >
+              @error('bachelor_year')
+                  <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </td>
+            <td>
+              <input 
+                  type="text" 
+                  placeholder="Grade" 
+                  name="bachelor_grade" 
+                  value="{{ old('bachelor_grade', isset($data) ? $data->bachelor_grade : '') }}" 
+                  {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' }} 
+                   
+              >
+              @error('bachelor_grade')
+                  <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </td>
+            <td>
+              <input 
+                  type="text" 
+                  placeholder="Reg. No." 
+                  name="bachelor_reg_no" 
+                  value="{{ old('bachelor_reg_no', isset($data) ? $data->bachelor_reg_no : '') }}" 
+                  {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' }} 
+                   
+              >
+              @error('bachelor_reg_no')
+                  <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </td>
+            <td>
+              <input 
+                  type="text" 
+                  placeholder="Remarks" 
+                  name="bachelor_remarks" 
+                  value="{{ old('bachelor_remarks', isset($data) ? $data->bachelor_remarks : '') }}" 
+                  {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' }}
+              >
+              @error('bachelor_remarks')
+                  <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </td>
+          </tr>
         </tbody>
       </table>
     
@@ -529,9 +597,9 @@ enctype="multipart/form-data"
         Additional Information
       </h1>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
         <div class="col-span-1">
-            <label for="applied_college">Applied College</label>
+            <label for="applied_college">Applied Board / Institute</label>
             <input 
                 type="text" 
                 name="applied_college" 
@@ -546,7 +614,7 @@ enctype="multipart/form-data"
             @enderror
         </div>
         
-        <div class="col-span-1">
+        {{-- <div class="col-span-1">
             <label for="applied_university">Applied University</label>
             <input 
                 type="text" 
@@ -560,9 +628,9 @@ enctype="multipart/form-data"
             @error('applied_university')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
-        </div>
+        </div> --}}
         
-        <div class="col-span-1">
+        {{-- <div class="col-span-1">
             <label for="npc_enlisted" class="block font-medium text-gray-700">
                 College/University Enlisted in NPC
             </label>
@@ -593,13 +661,29 @@ enctype="multipart/form-data"
             @error('npc_enlisted')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
+        </div> --}}
+
+        <div class="col-span-1">
+            <label for="applied_college">NPC Council Registration Number</label>
+            <input 
+                type="text" 
+                name="registration_number" 
+                id="registration_number" 
+                class="form-input w-full" 
+                value="{{ old('registration_number', isset($data) ? $data->registration_number : '') }}" 
+                {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' }} 
+                required
+            >
+            @error('registration_number')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
       </div>
     
   
 
       <h1 class="col-span-3 text-center text-primary text-xl font-semibold uppercase mt-2">
-        Documents
+       Required Documents 
      </h1>
      <div class="document-note text-center" aria-live="polite" style="color:red;" >
       <p>Documents should be in image format and should be less than 200KB.</p>
@@ -760,107 +844,265 @@ enctype="multipart/form-data"
     </div>
     
 
-      <h2 class="section-heading mt-5"> Plus 2 Document    </h2>
+      <h2 class="section-heading mt-5"> Plus 2 / Diploma Document    </h2>
       <div class="document-grid">
-    <div class="document-item">
-        <label for="plus2_marksheet">
-            @isset($data->plus2_marksheet)
+            <div class="document-item">
+                <label for="plus2_marksheet">
+                    @isset($data->plus2_marksheet)
+                            
+                    <img src="{{ getImage($data->plus2_marksheet) }}" alt="plus2 MarkSheet">
+                    @endisset
+                    <p>Plus 2 MarkSheet*</p>
+                </label>
+                <input 
+                    type="file" 
+                    id="plus2_marksheet" 
+                    name="plus2_marksheet" 
+                    accept="image/*"
+                    value="{{ old('plus2_marksheet') }}"
+                    {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                    {{ !isset($data) && 'required' }}
+
+                    max="204800"
+                >
+                @error('plus2_marksheet')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="document-item">
+                <label for="plus2_provisional">
+                    @isset($data->plus2_provisional)
+                            
+                    <img src="{{ getImage($data->plus2_provisional) }}" alt="plus2_provisional">
+                    @endisset
+                    <p>Plus 2 Provisional*</p>
+                </label>
+                <input 
+                    type="file" 
+                    id="plus2_provisional" 
+                    name="plus2_provisional" 
+                    accept="image/*"
+                    value="{{ old('plus2_provisional') }}"
+                    {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                    {{ !isset($data) && 'required' }}
+
+                    max="204800"
+                >
+                @error('plus2_provisional')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="document-item">
+                <label for="plus2_character">
+                    @isset($data->plus2_character)
+                            
+                    <img src="{{ getImage($data->plus2_character) }}" alt="plus2_character">
+                    @endisset
+                    <p>Plus 2 Character*</p>
+                </label>
+                <input 
+                    type="file" 
+                    id="plus2_character" 
+                    name="plus2_character" 
+                    accept="image/*"
+                    value="{{ old('plus2_character') }}"
+                    {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                    {{ !isset($data) && 'required' }}
+
+                    max="204800"
+                >
+                @error('plus2_character')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="document-item">
+                <label for="plus2_equivalence"> 
+                    @isset($data->plus2_equivalence)
+                            
+                    <img src="{{ getImage($data->plus2_equivalence) }}" alt="plus2_equivalence">
+                    @endisset
+                    <p>Equivalence (in case of foreign college)</p>
+                </label>
+                <input 
+                    type="file" 
+                    id="plus2_equivalence" 
+                    name="plus2_equivalence" 
+                    accept="image/*"
+                    value="{{ old('plus2_equivalence') }}"
+                    {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                    {{-- required --}}
+                    max="204800"
+                >
+                @error('plus2_equivalence')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+  </div>
+  <h2 class="section-heading mt-5"> Bachelor Document    </h2>
+  <div class="document-grid">
+        <div class="document-item">
+            <label for="bachelor_transcript">
+                @isset($data->bachelor_transcript)
+                        
+                <img src="{{ getImage($data->bachelor_transcript) }}" alt="plus2 MarkSheet">
+                @endisset
+                <p>Bachelor Transcript*</p>
+            </label>
+            <input 
+                type="file" 
+                id="bachelor_transcript" 
+                name="bachelor_transcript" 
+                accept="image/*"
+                value="{{ old('bachelor_transcript') }}"
+                {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                {{ !isset($data) && 'required' }}
+
+                max="204800"
+            >
+            @error('bachelor_transcript')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="document-item">
+            <label for="bachelor_provisional">
+                @isset($data->bachelor_provisional)
+                        
+                <img src="{{ getImage($data->bachelor_provisional) }}" alt="plus2_provisional">
+                @endisset
+                <p>Bachelor Provisional*</p>
+            </label>
+            <input 
+                type="file" 
+                id="bachelor_provisional" 
+                name="bachelor_provisional" 
+                accept="image/*"
+                value="{{ old('bachelor_provisional') }}"
+                {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                {{ !isset($data) && 'required' }}
+
+                max="204800"
+            >
+            @error('bachelor_provisional')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="document-item">
+            <label for="bachelor_character">
+                @isset($data->bachelor_character)
+                        
+                <img src="{{ getImage($data->bachelor_character) }}" alt="bachelor_character">
+                @endisset
+                <p>Bachelor Character*</p>
+            </label>
+            <input 
+                type="file" 
+                id="bachelor_character" 
+                name="bachelor_character" 
+                accept="image/*"
+                value="{{ old('bachelor_character') }}"
+                {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                {{ !isset($data) && 'required' }}
+
+                max="204800"
+            >
+            @error('bachelor_character')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div class="document-item">
+            <label for="bachelor_equivalence"> 
+                @isset($data->bachelor_equivalence)
+                        
+                <img src="{{ getImage($data->bachelor_equivalence) }}" alt="bachelor_equivalence">
+                @endisset
+                <p>Equivalence (in case of foreign college)</p>
+            </label>
+            <input 
+                type="file" 
+                id="bachelor_equivalence" 
+                name="bachelor_equivalence" 
+                accept="image/*"
+                value="{{ old('bachelor_equivalence') }}"
+                {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+
+                {{-- required --}}
+                max="204800"
+            >
+            @error('bachelor_equivalence')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+</div>
+  
+  <h2 class="section-heading mt-5">Name Registration Certificate of NPC</h2>
+      <div class="document-grid">
+        <div class="document-item">
+          <label for="name_registration_of_npc">
+            @isset($data->name_registration_of_npc)
                     
-            <img src="{{ getImage($data->plus2_marksheet) }}" alt="plus2 MarkSheet">
+            <img src="{{ getImage($data->name_registration_of_npc) }}" alt="Name Registration of npc">
             @endisset
-            <p>Plus 2 MarkSheet*</p>
+            <p>Name Registration Certificate of NPC front*</p>
         </label>
         <input 
             type="file" 
-            id="plus2_marksheet" 
-            name="plus2_marksheet" 
+            id="name_registration_of_npc" 
+            name="name_registration_of_npc" 
             accept="image/*"
-            value="{{ old('plus2_marksheet') }}"
+            value="{{ old('name_registration_of_npc') }}"
             {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
-
+     
             {{ !isset($data) && 'required' }}
 
+            
             max="204800"
         >
-        @error('plus2_marksheet')
+        @error('name_registration_of_npc')
             <span class="text-red-500 text-sm">{{ $message }}</span>
         @enderror
-    </div>
-
-      <div class="document-item">
-          <label for="plus2_provisional">
-            @isset($data->plus2_provisional)
-                    
-            <img src="{{ getImage($data->plus2_provisional) }}" alt="plus2_provisional">
-            @endisset
-              <p>Plus 2 Provisional*</p>
+        </div>
+        
+        <div class="document-item">
+            <label for="name_registration_of_npc_back">
+              @isset($data->name_registration_of_npc_back)
+                      
+              <img src="{{ getImage($data->name_registration_of_npc_back) }}" alt="Name Registration Certificate of NPC Back">
+              @endisset
+              <p>Name Registration Certificate of NPC Back*</p>
           </label>
           <input 
               type="file" 
-              id="plus2_provisional" 
-              name="plus2_provisional" 
+              id="name_registration_of_npc_back" 
+              name="name_registration_of_npc_back" 
               accept="image/*"
-              value="{{ old('plus2_provisional') }}"
+              value="{{ old('name_registration_of_npc_back') }}"
               {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
-
+       
               {{ !isset($data) && 'required' }}
-
+  
+              
               max="204800"
           >
-          @error('plus2_provisional')
+          @error('name_registration_of_npc_back')
               <span class="text-red-500 text-sm">{{ $message }}</span>
           @enderror
+          </div>
+        
+        
       </div>
-
-      <div class="document-item">
-          <label for="plus2_character">
-            @isset($data->plus2_character)
-                    
-            <img src="{{ getImage($data->plus2_character) }}" alt="plus2_character">
-            @endisset
-              <p>Plus 2 Character*</p>
-          </label>
-          <input 
-              type="file" 
-              id="plus2_character" 
-              name="plus2_character" 
-              accept="image/*"
-              value="{{ old('plus2_character') }}"
-              {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
-
-              {{ !isset($data) && 'required' }}
-
-              max="204800"
-          >
-          @error('plus2_character')
-              <span class="text-red-500 text-sm">{{ $message }}</span>
-          @enderror
-      </div>
-
-      <div class="document-item">
-          <label for="plus2_equivalence"> 
-            @isset($data->plus2_equivalence)
-                    
-            <img src="{{ getImage($data->plus2_equivalence) }}" alt="plus2_equivalence">
-            @endisset
-              <p>Equivalence (in case of foreign college)</p>
-          </label>
-          <input 
-              type="file" 
-              id="plus2_equivalence" 
-              name="plus2_equivalence" 
-              accept="image/*"
-              value="{{ old('plus2_equivalence') }}"
-              {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
-
-              {{-- required --}}
-              max="204800"
-          >
-          @error('plus2_equivalence')
-              <span class="text-red-500 text-sm">{{ $message }}</span>
-          @enderror
-      </div>
-  </div>
 
       <h2 class="section-heading mt-5">Bank Voucher</h2>
       <div class="document-grid">

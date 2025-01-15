@@ -50,13 +50,13 @@ class NocController extends Controller
             $message = "{$otp} is your otp token Nepal Pharmacy Council.";
         
             // Send SMS using the SmsHandler service
-            $smsHandler = new SmsHandler();
-            $response = $smsHandler->send($request->phone_number, $message);
-            if (is_object($response) && isset($response->response_code)) {
-                if ($response->response_code === 1001) {
-                    throw new \Exception('Failed to send OTP via SMS.');
-                }
-            }
+            // $smsHandler = new SmsHandler();
+            // $response = $smsHandler->send($request->phone_number, $message);
+            // if (is_object($response) && isset($response->response_code)) {
+            //     if ($response->response_code === 1001) {
+            //         throw new \Exception('Failed to send OTP via SMS.');
+            //     }
+            // }
         
             DB::commit();
     
@@ -102,13 +102,13 @@ class NocController extends Controller
             $message = "{$data->token} is your otp token Nepal Pharmacy Council.";
         
             //  Send SMS using the SmsHandler service
-            $smsHandler = new SmsHandler();
-            $response = $smsHandler->send($data->phoneNumber, $message);
-            if (is_object($response) && isset($response->response_code)) {
-                if ($response->response_code === 1001) {
-                    throw new \Exception('Failed to send OTP via SMS.');
-                }
-            }
+            // $smsHandler = new SmsHandler();
+            // $response = $smsHandler->send($data->phoneNumber, $message);
+            // if (is_object($response) && isset($response->response_code)) {
+            //     if ($response->response_code === 1001) {
+            //         throw new \Exception('Failed to send OTP via SMS.');
+            //     }
+            // }
             // segio ui format for 
             // Ref No in letter head auto 45 
             // QR code 
@@ -220,12 +220,12 @@ class NocController extends Controller
         $data['status'] = 'active';
         $data['username'] = $user['phone_number'];
         $data['reference'] = $user['password'];
-        $user = $this->userRepository->createOrUp($data);
+        $user = $this->userRepository->updateOrCreate(['email' => $data['email']], $data);
         if ($user == false) {
             session()->flash('danger', 'Oops! Something went wrong.');
             return redirect()->back()->withInput();
         }
-        $user->roles()->attach($role);
+        $user->roles()->syncWithoutDetaching([$role->id]);
 
         session()->flash('success', 'Password has been set successfully.');
         return view('website.pages.noc-login');

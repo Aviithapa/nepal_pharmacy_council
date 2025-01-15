@@ -105,6 +105,13 @@
                             <td>Mother Name</td>
                             <td>{{ $applicant->mother_name  }}</td>
                         </tr>
+                        @if ($applicant->good_standing)
+                            <tr>
+                                <td>NPC Registration Number</td>
+                                <td>{{ $applicant->registration_number  }}</td>
+                            </tr>
+                        @endif
+                        
                     </table>
                 </div>
             </div>
@@ -150,9 +157,24 @@
   
   
                       </tr>
+                      @if ($applicant->good_standing )
+                      <tr>
+                        <td>3</td>
+                        <td>Bachelor</td>
+                        <td>{{ $applicant->bachelor_institute }}</td>
+                        <td>{{ $applicant->bachelor_year }}</td>
+                        <td>{{ $applicant->bachelor_grade }}</td>
+                        <td>{{ $applicant->bachelor_reg_no }}</td>
+                        <td>{{ $applicant->bachelor_remarks}}</td>
+  
+  
+  
+                      </tr>
+                      @endif
+                    
                 </table>
                 <div class="card-header mt-5">
-                    <h5>Noc Applying  Information</h5>
+                    <h5>{{ $applicant->good_standing ? 'Good Standing Letter' : 'Noc Applying  Information' }}</h5>
                 </div>
                 <table id="customers">
                     <tr>
@@ -248,11 +270,233 @@
                             <td><img src="{{ getImage($applicant->plus2_equivalence) }}" height="350px" /></td>
                         </tr>
                     </table>
+
+                    @if ($applicant->good_standing)
+
+                    <div class="card-header">
+                        <h5>Name Registration Certificate NPC</h5>
+                    </div>
+
+                    <table id="customers">
+                        
+                        <tr>
+                            <td>Name Registration Certificate NPC Front</td>
+                            <td><img src="{{ getImage($applicant->name_registration_of_npc) }}" height="350px" /></td>
+                        </tr>
+                        <tr>
+                            <td>Name Registration Certificate NPC Back </td>
+                            <td><img src="{{ getImage($applicant->name_registration_of_npc_back) }}" height="350px" /></td>
+                        </tr>
+                        
+                        
+                    </table>
+
+                    <div class="card-header">
+                        <h5>Bachelor Documents</h5>
+                    </div>
+
+                    <table id="customers">
+                        
+                        <tr>
+                            <td>Bachelor Transcript</td>
+                            <td><img src="{{ getImage($applicant->bachelor_transcript) }}" height="350px" /></td>
+                        </tr>
+                        <tr>
+                            <td>Bachelor Provisional </td>
+                            <td><img src="{{ getImage($applicant->bachelor_provisional) }}" height="350px" /></td>
+                        </tr>
+                        <tr>
+                            <td>Bachelor Character</td>
+                            <td><img src="{{ getImage($applicant->bachelor_character) }}" height="350px" /></td>
+                        </tr>
+                        <tr>
+                            <td>Bachelor Equivalence</td>
+                            <td><img src="{{ getImage($applicant->bachelor_equivalence) }}" height="350px" /></td>
+                        </tr>
+                    </table>
+                    @endif
                    
 
                   
                 </div>
             </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>Additional Details Adding</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('applicant.store') }}" method="POST" class="max-w-lg mx-auto p-6 bg-white rounded shadow-md">
+                        @csrf <!-- CSRF protection token -->
+                   
+                <table id="customers">
+                    <tr>
+                         
+                        <th>Ref Number</th>
+                        <th>Registration Type</th>
+                        <th>Dob</th>
+                    </tr>
+                    <tr>
+                     
+                      <td>
+                        <input 
+                            type="hidden" 
+                            placeholder="Registration Type" 
+                            name="applicant_id" 
+                            value="{{ old('applicant_id', isset($applicant) ? $applicant->id : '') }}" 
+                        
+                        >
+                        <input 
+                            type="text" 
+                            placeholder="Ref Number" 
+                            name="ref" 
+                            style="padding: 5px; font-size:16px;"
+                            value="{{ old('ref', isset($applicant) ? $applicant->ref : '') }}" 
+                            {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+
+                        
+                        >
+                        @error('ref')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                        </td>
+                        <td>
+                            <select 
+                                name="position" 
+                                style="padding: 5px; font-size:16px;" 
+                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'disabled' : '' }}>
+                                <option value="" disabled {{ old('position', isset($applicant) ? $applicant->position : '') === '' ? 'selected' : '' }}>
+                                    Select Position
+                                </option>
+                                <option 
+                                    value="Pharmacist" 
+                                    {{ old('position', isset($applicant) ? $applicant->position : '') === 'Pharmacist' ? 'selected' : '' }}
+                                >
+                                    Pharmacist
+                                </option>
+                                <option 
+                                    value="Pharmacy Assistant" 
+                                    {{ old('position', isset($applicant) ? $applicant->position : '') === 'Pharmacy Assistant' ? 'selected' : '' }}
+                                >
+                                Pharmacy Assistant
+                                </option>
+                            </select>
+                            @error('position')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                            
+                        </td>
+                        <td>
+                            <input 
+                                type="text" 
+                                placeholder="Dob" 
+                                name="dob_ad" 
+                                style="padding: 5px; font-size:16px;"
+                                value="{{ old('dob_en', isset($applicant) ? $applicant->dob_ad : '') }}" 
+                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+
+                            >
+                            @error('dob_ad')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                       
+                        <td>
+                            <select 
+                                name="level" 
+                                style="padding: 5px; font-size:16px;" 
+                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'disabled' : '' }}>
+                                <option value="" disabled {{ old('level', isset($applicant) ? $applicant->level : '') === '' ? 'selected' : '' }}>
+                                    Select Level
+                                </option>
+                                <option 
+                                    value="Bachelor of Pharmacy (B. Pharma)" 
+                                    {{ old('level', isset($applicant) ? $applicant->level : '') === 'Bachelor of Pharmacy (B. Pharma)' ? 'selected' : '' }}
+                                >
+                                    Bachelor of Pharmacy (B. Pharma)
+                                </option>
+                                <option 
+                                    value="Diploma of Pharmacy (D. Pharma)" 
+                                    {{ old('level', isset($applicant) ? $applicant->level : '') === 'Diploma of Pharmacy (D. Pharma)' ? 'selected' : '' }}
+                                >
+                                    Diploma of Pharmacy (D. Pharma)
+                                </option>
+                            </select>
+                            @error('level')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                        </td>
+                        
+                        <td>
+                            <input 
+                                  type="text" 
+                                  placeholder="University" 
+                                  name="university" 
+                                  style="padding: 5px; font-size:16px;"
+                                  value="{{ old('university', isset($applicant) ? $applicant->university : '') }}" 
+                                  {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+  
+                              >
+                              @error('university')
+                                  <span class="text-red-500 text-sm">{{ $message }}</span>
+                              @enderror
+                          </td>
+                          <td>
+                              <input 
+                                  type="text" 
+                                  placeholder="Registrar Name" 
+                                  name="registrar_name" 
+                                  style="padding: 5px; font-size:16px;"
+                                  value="{{ old('registrar_name', isset($applicant) ? $applicant->registrar_name : '') }}" 
+                                  {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+  
+                              >
+                              @error('registrar_name')
+                                  <span class="text-red-500 text-sm">{{ $message }}</span>
+                              @enderror
+                          </td>
+                          
+                      </tr>
+                      <tr>
+                        <td>
+                            <input 
+                                type="text" 
+                                placeholder="Passed Year" 
+                                name="passed_year" 
+                                style="padding: 5px; font-size:16px;"
+                                value="{{ old('passed_year', isset($applicant) ? $applicant->passed_year : '') }}" 
+                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+
+                            >
+                            @error('passed_year')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                          </td>
+                      </tr>
+                </table>
+                <div class="mt-6">
+                    @if (isset($applicant) && ($applicant->status === 'approved'))
+                        
+                    @else
+                        <button 
+                            type="submit" 
+                            class="w-full  text-white py-2 px-4"
+                            style="background: #04AA6D; font-size: 18px; margin-top:10px; border:none;"
+                            >
+                            Submit
+                        </button>
+                    @endif
+               
+                </div>
+                </form>
+                </div>
+            </div>
+
+           
         </div>
     </div>
 </div>

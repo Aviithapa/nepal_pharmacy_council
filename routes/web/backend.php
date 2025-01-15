@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Inquiry\InquiryController;
 use App\Http\Controllers\Admin\NOC\NOCController;
 use App\Http\Controllers\Admin\Settings\SiteSettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\GoodStanding\GoodStandingController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::resource('dashboard/user', UserController::class)->middleware(['auth']);
@@ -51,7 +52,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('cms/coc', CodeOfConductController::class)->only('index', 'store', 'destroy');
     Route::resource('cms/noc-main', CMSNocController::class)->only('index', 'show', 'update');
     Route::put('cms/noc-approve/{id}', [CMSNocController::class, 'approve'])->name('noc.approve');
+    Route::post('cms/store-data', [CMSNocController::class, 'storeData'])->name('applicant.store');
 
+    
     Route::resource('inquiry', InquiryController::class)->only('index');
     Route::post('quickNews', [NewsController::class, 'storeQuickNews'])->name('quick.news');
     Route::delete('mediaDestroy/{media}', [NewsController::class, 'mediaDestroy'])->name('media.destroy');
@@ -75,3 +78,5 @@ Route::resource('site-settings', SiteSettingController::class, [
 
 //NOC
 Route::resource('backend/noc', NOCController::class)->middleware(['auth']);
+
+Route::resource('backend/good-standing', GoodStandingController::class)->middleware(['auth']);

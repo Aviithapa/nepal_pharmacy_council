@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin\NOC;
+namespace App\Http\Controllers\GoodStanding;
 
 use App\Client\FileUpload\FileUploaderInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateNocFormRequest;
-use App\Http\Requests\UpdateNocFormRequest;
+use App\Http\Requests\CreateGoodStandingRequest;
 use App\Repositories\Media\MediaRepository;
 use App\Repositories\NocUser\NocApplicationRepository;
 use App\Repositories\User\UserRepository;
 use Exception;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
-class NOCController extends Controller
+class GoodStandingController extends Controller
 {
-
     protected $nocApplicationRepository, $userRepository;
     protected $fileUploader;
     protected $mediaRepository;
@@ -34,7 +30,6 @@ class NOCController extends Controller
         $this->userRepository = $userRepository;
     }
 
-
     /**
      * Display a listing of the resource.
      */
@@ -43,23 +38,17 @@ class NOCController extends Controller
         $id =  Auth::user()->id;
         $data = $this->nocApplicationRepository->all()->where(
          'user_id', $id
-        )->where('good_standing', false)->first();
+        )->where('good_standing', true)->first();
       
-        return view('admin.pages.noc.index', compact('data'));
+        return view('admin.pages.good-standing.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateNocFormRequest $request)
+    public function store(CreateGoodStandingRequest $request)
     {
         $data = $request->all();
         try {
@@ -67,6 +56,7 @@ class NOCController extends Controller
             $data['user_id'] =  Auth::user()->id;
             $data['status'] = 'pending'; // Default status
             $data['remarks'] = $data['remarks'] ?? '';
+            $data['good_standing'] = true;
             $banner = $this->nocApplicationRepository->store($data);
             if ($banner === false) {
                 session()->flash('danger', 'Oops! Something went wrong.');
@@ -85,6 +75,12 @@ class NOCController extends Controller
                 'plus2_character',
                 'plus2_equivalence',
                 'bank_voucher',
+                'bachelor_transcript',
+                'bachelor_provisional',
+                'bachelor_character',
+                'bachelor_equivalence',
+                'name_registration_of_npc',
+                'name_registration_of_npc_back'
             ];
 
             foreach ($fileFields as $field) {
@@ -99,8 +95,8 @@ class NOCController extends Controller
 
             
             DB::commit();
-            session()->flash('success', 'Noc Form has been submitted successfully.');
-            return redirect()->route('noc.index');
+            session()->flash('success', 'Good Standing Form has been submitted successfully.');
+            return redirect()->route('good-standing.index');
         } catch (Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Oops! Something went wrong.' . $e);
@@ -108,26 +104,13 @@ class NOCController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
+   
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNocFormRequest $request, string $id)
+    public function update(CreateGoodStandingRequest $request, string $id)
     {
         $data = $request->all();
         try {
@@ -155,6 +138,12 @@ class NOCController extends Controller
                 'plus2_character',
                 'plus2_equivalence',
                 'bank_voucher',
+                'bachelor_transcript',
+                'bachelor_provisional',
+                'bachelor_character',
+                'bachelor_equivalence',
+                'name_registration_of_npc',
+                'name_registration_of_npc_back'
             ];
 
             foreach ($fileFields as $field) {
@@ -169,22 +158,12 @@ class NOCController extends Controller
 
             
             DB::commit();
-            session()->flash('success', 'Noc Form has been submitted successfully.');
-            return redirect()->route('noc.index');
+            session()->flash('success', 'Good Standing Form has been submitted successfully.');
+            return redirect()->route('good-standing.index');
         } catch (Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Oops! Something went wrong.' . $e);
             return redirect()->back()->withInput();
         }
-    }
-
-
-    
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

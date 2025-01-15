@@ -51,8 +51,8 @@ return new class extends Migration
             $table->text('plus2_remarks')->nullable();
 
             $table->string('applied_college');
-            $table->string('applied_university');
-            $table->string('npc_enlisted');
+            $table->string('applied_university')->nullable();
+            $table->string('npc_enlisted')->nullable();
 
             $table->string('citizenship_front')->nullable();
             $table->string('citizenship_back')->nullable();

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class NocController extends Controller
 {
@@ -124,26 +125,41 @@ class NocController extends Controller
             $data['uuid'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
     
             // Get next auto-incremented ref from the database
-            $data['ref'] = $this->nocApplicationRepository->getNextRef(); // Repository method to get the next ref
-    
             $data['status'] = 'approved'; // Default status
             
             $nocData = $this->nocApplicationRepository->findOrFail($id);
-    
-            $pdf = Pdf::loadView('admin.pages.cms.noc.noc_registration', [
-                'nocData' => $nocData,
-                'currentDate' => Carbon::now()->format('Y-m-d'),
-            ]);
     
             $invoicesPath = storage_path('app/public/noc/' . $nocData->id);
             if (!file_exists($invoicesPath)) {
                 mkdir($invoicesPath, 0755, true);
             }
     
-            $pdf_file_name = 'noc_' . $data['ref'] . '.pdf';
-            $pdf->save($invoicesPath . '/' . $pdf_file_name);
+            $pdf_file_name = 'noc_' . $data['uuid'] . '.pdf';
             $pdf_url = 'noc/'. $nocData->id . '/' . $pdf_file_name;
-    
+            $qr_url = 'storage/noc/'. $nocData->id . '/' . $pdf_file_name;
+
+            $url = url($qr_url);
+            $qrCode = QrCode::size(100)->generate($url);
+            $qrCodeBase64 = 'data:image/png;base64,' . base64_encode($qrCode);
+            $dobFormatted = Carbon::parse($nocData->dob_ad)->format('d M Y');
+
+            if($nocData->good_standing){
+                $pdf = Pdf::loadView('admin.pages.cms.noc.good_standing', [
+                    'nocData' => $nocData,
+                    'currentDate' => Carbon::now()->format('Y-m-d'),
+                    'qrCode' => $qrCodeBase64,
+                    'dob' => $dobFormatted
+                ]);
+
+            }else{
+                $pdf = Pdf::loadView('admin.pages.cms.noc.noc_registration', [
+                    'nocData' => $nocData,
+                    'currentDate' => Carbon::now()->format('Y-m-d'),
+                    'qrCode' => $qrCodeBase64
+                ]);
+            }
+
+            $pdf->save($invoicesPath . '/' . $pdf_file_name);
             $data['pdf_link'] = $pdf_url;
     
             $banner = $this->nocApplicationRepository->update($id, $data);
@@ -157,10 +173,21 @@ class NocController extends Controller
             return redirect()->route('noc-main.index');
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
             session()->flash('error', 'Oops! Something went wrong.' . $e);
             return redirect()->back()->withInput();
         }
+    }
+
+
+    public function storeData(Request $request){
+        $data = $request->all();
+        $nocData = $this->nocApplicationRepository->findOrFail($data['applicant_id']);
+        $banner = $this->nocApplicationRepository->update($nocData->id, $data);
+        if ($banner === false) {
+            session()->flash('danger', 'Oops! Something went wrong.');
+            return redirect()->back()->withInput();
+        }
+        return redirect()->route('noc-main.index');
     }
     
 

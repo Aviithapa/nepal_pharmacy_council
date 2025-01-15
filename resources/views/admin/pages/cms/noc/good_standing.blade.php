@@ -83,100 +83,48 @@
       <div class="noc_content">
         <!-- Ref of noc -->
         <div class="ref_container" style="width: 100%; color: #0000ff; font-weight: 600; margin-bottom: 1rem; font-style: italic;">
-            <p style="margin: 0; float: left; width: 50%;">Ref. No.: </p>
+            <p style="margin: 0; float: left; width: 50%;">Ref. No.:    {{ $nocData->ref }}</p>
             <p style="margin: 0; float: right; width: 50%; text-align:right;">Date: {{ $currentDate }}</p>
         </div>
     </div>
     
           <!-- main content of noc-->
-          <div
-            style="
-              padding: 0 3rem;
-              margin-bottom: 5rem;
+          <div style="padding: 0 3rem;
+              margin-top: 9rem;
               background-image: url('{{ public_path('frontend/images/bg.png') }}');
               background-position: center center;
               background-repeat: no-repeat;
               z-index: -100;
               background-size: contain;
-              background-blend-mode: multiply;
-            "
-          >
-          <table style="width: 100%; height: 80px; font-weight: 600; margin-bottom: 1rem; border-collapse: collapse;">
-            <tr>
-              <!-- Image Cell -->
-              <td style="width: 50%; height: 80px; text-align: left;">
-                <p>
-                  <span style="text-transform: capitalize;">
-                    {{ $nocData->title }}
-                  </span>
-                    {{ $nocData->first_name . ' ' . $nocData->middle_name . ' ' . $nocData->last_name }}
-                </p>
-                <p>Citizenship No: {{ $nocData->citizenship }}</p>
-                <p>
-                  {{ $nocData->tole . ' ' . $nocData->ward . ' ' . $nocData->municipality . ' ' . $nocData->district }},
-                  Nepal
-                </p> 
-              </td>
-              <!-- Text Cell -->
-              
-            </tr>
-          </table>
-          
-          
-          
+              background-blend-mode: multiply;">
             <div
               class="subject_container"
               style="text-align: center; font-weight: 600; margin-bottom: 1rem; width:100%;"
             >
               <p style="font-size: 14px; text-decoration: underline">
-                Subject: No Objection Letter
+                Subject: Letter of Good Standing
               </p>
             </div>
             <div class="noc_body" style="font-size: 14px; line-height: 30px;">
               <p style="margin-bottom: 1rem">
-                Nepal Pharmacy Council (NPC) has no objection if you study and
-                obtain <strong>Diploma in Pharmacy</strong> degree from the
-                following academic institution with the conditions given below:
+                This is to certify that   <span style="text-transform: capitalize;">
+                    {{ $nocData->title }}
+                  </span>
+                  <span style="font-weight:700">{{ $nocData->first_name . ' ' . $nocData->middle_name . ' ' . $nocData->last_name }} 
+                  </span>
+                    a Nepalese national holding 
+                 Passport no  <span style="font-weight:700">{{ $nocData->national_id }}</span> is registered with registration number  <span style="font-weight:700">{{ $nocData->registration_number }}</span> as a {{ $nocData->position }} in Nepal Pharmacy Council in accordance with
+                 Nepal Pharmacy Council act, 2057 8.5.(2000 A.D).
+                  <br /> <br />
+                  {{ $nocData->title === 'mr' ? 'His' : 'Her' }} date of birth according to our record is {{ $dob }}. 
+                 {{ $nocData->title === 'mr' ? 'He' : 'She' }} has passed  <span style="font-weight:700">{{ $nocData->level }}</span> from {{ $nocData->university }} 
+                  in {{ $nocData->passed_year }}. {{ $nocData->title === 'mr' ? 'He' : 'She' }} is registered as a {{ $nocData->position }}. There is nothing against 
+                  {{ $nocData->title === 'mr' ? 'him' : 'her' }} in Nepal Pharmacy Council till present day. <br /> <br /> I wish success in {{ $nocData->title === 'mr' ? 'his' : 'her' }} future career.
+               
               </p>
-              <div
-                class="list_conditions"
-                style="padding-left: 150px; margin-bottom: 1rem; line-height: 30px;"
-              >
-                <ul
-                  style="
-                    list-style-type: number;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.75rem;
-                  "
-                >
-                  <li>
-                    <p>
-                      Institution must be approved by Pharmacy Council of
-                      respective country.
-                    </p>
-                  </li>
-                  <li>
-                    <p>The internship will be the Liability of college.</p>
-                  </li>
-                  <li>
-                    <p>
-                      You must have done thesis work related subject of which an
-                      abstract should be submitted to the council at the time of
-                      registration.
-                    </p>
-                  </li>
-                </ul>
-              </div>
+              
               <!-- university name-->
-              <div class="university_info" style="font-weight: 600; line-height: 26px;">
-                <p>Name of College/Institution:</p>
-                <p style="width: 250px; ">
-                    {{ $nocData->applied_college }}
-                </p>
-                <p>Afilated University/Board</p>
-                <p>{{ $nocData->applied_university }}</p>
-              </div>
+             
               <table style="width: 100%; height: 80px; font-weight: 600; margin-bottom: 1rem; border-collapse: collapse;">
                 <tr>
                   <!-- Image Cell -->
@@ -189,7 +137,7 @@
                   <td style="width: 50%; height: 80px; text-align: center;">
                     <div style="display: inline-block; text-align: center;">
                       <img src="{{ public_path('frontend/images/signature.png') }}" height="120" width="120" style="object-fit: contain" />
-                      <h4>Sanjiv Kumar Pandey</h4>
+                      <h4>{{ $nocData->registrar_name }}</h4>
                       <h4>Registrar</h4>
                   </div>
                   </td>
@@ -198,26 +146,7 @@
                 </tr>
               </table>
              
-              <div class="note" style="font-weight: 600">
-                <h4>Note:-</h4>
-                <ul style="list-style-type: number; padding-left: 2.5rem">
-                  <li>
-                    <p>
-                      This NOC is issued based on the documents submitted by the
-                      student and the approval of the institution by Pharmacy
-                      Council of India. The authenticity of the academic
-                      certificates of the respective student can be obtained
-                      from the respective Board.
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      If the documents submitted are found to be fraudulent,
-                      this NOC will be cancelled at any time.
-                    </p>
-                  </li>
-                </ul>
-              </div>
+            
             </div>
           </div>
           <!-- noc footer -->

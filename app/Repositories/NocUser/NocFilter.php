@@ -11,7 +11,7 @@ class NocFilter extends BaseFilter
      *
      * @var array
      */
-    protected $filters = ['keyword', 'status'];
+    protected $filters = ['keyword', 'status', 'good_standing'];
 
 
     /**
@@ -48,6 +48,13 @@ class NocFilter extends BaseFilter
     {
         if ($this->request->has('citizenship')) {
             $this->builder->where('citizenship', 'LIKE', '%' . $this->request->get('citizenship') . '%');
+        }
+    }
+
+    public function goodStanding()
+    {
+        if ($this->request->has('good_standing')) {
+            $this->builder->where('good_standing', 'LIKE', '%' . $this->request->get('good_standing') . '%');
         }
     }
 

@@ -64,7 +64,25 @@ class NocApplication extends Model
         'remarks',
         'pdf_link',
         'ref',
-        'uuid'
+        'uuid',
+        'bachelor_transcript',
+        'bachelor_provisional',
+        'bachelor_character',
+        'bachelor_equivalence',
+        'name_registration_of_npc',
+        'good_standing',
+        'bachelor_institute',
+        'bachelor_year',
+        'bachelor_grade',
+        'bachelor_reg_no',
+        'bachelor_remarks',
+        'position',
+        'registration_number',
+        'level',
+        'university',
+        'registrar_name',
+        'passed_year',
+        'name_registration_of_npc_back'
     ];
 
     /**
