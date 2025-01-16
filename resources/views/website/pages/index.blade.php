@@ -74,6 +74,24 @@
         <div
           class="npc__quick-links-wrapper flex flex-col justify-between"
         >
+        <!-- NOc And Good Standing  -->
+        <a
+        href="/noc-online"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="npc__quick-link {{ getBlinking('1') ? 'blinking-element' : '' }}  flex items-center justify-between"
+      >
+        <div class="npc__quick-link-title flex">
+          <span>
+            <i class="fa-solid fa-book" ></i>
+          </span>
+          <h2 class="" style="text-align: center;" >Apply For Noc <br /> Apply for Good Standing Letter </h2>
+        </div>
+        <span class="">
+          <i class="fa-solid fa-bars"></i>
+        </span>
+      </a>
+
           <!-- know your professional  -->
           <a
             href="https://nepalpharmacycouncil.org.np/kyp/public/"
