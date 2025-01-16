@@ -50,13 +50,13 @@ class NocController extends Controller
             $message = "{$otp} is your otp token Nepal Pharmacy Council.";
         
             // Send SMS using the SmsHandler service
-            // $smsHandler = new SmsHandler();
-            // $response = $smsHandler->send($request->phone_number, $message);
-            // if (is_object($response) && isset($response->response_code)) {
-            //     if ($response->response_code === 1001) {
-            //         throw new \Exception('Failed to send OTP via SMS.');
-            //     }
-            // }
+            $smsHandler = new SmsHandler();
+            $response = $smsHandler->send($request->phone_number, $message);
+            if (is_object($response) && isset($response->response_code)) {
+                if ($response->response_code === 1001) {
+                    throw new \Exception('Failed to send OTP via SMS.');
+                }
+            }
         
             DB::commit();
     
