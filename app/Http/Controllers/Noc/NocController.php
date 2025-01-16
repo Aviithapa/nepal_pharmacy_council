@@ -103,7 +103,9 @@ class NocController extends Controller
         
             //  Send SMS using the SmsHandler service
             $smsHandler = new SmsHandler();
-            $response = $smsHandler->send($data->phoneNumber, $message);
+            $response = $smsHandler->send($data->phone_number, $message);
+            
+
             if (is_object($response) && isset($response->response_code)) {
                 if ($response->response_code === 1001) {
                     throw new \Exception('Failed to send OTP via SMS.');
