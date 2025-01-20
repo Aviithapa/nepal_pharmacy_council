@@ -84,7 +84,7 @@
         <!-- Ref of noc -->
         <div class="ref_container" style="width: 100%; color: #0000ff; font-weight: 600; margin-bottom: 1rem; font-style: italic;">
             <p style="margin: 0; float: left; width: 50%;">Ref. No.: {{ $nocData->ref }}</p>
-            <p style="margin: 0; float: right; width: 50%; text-align:right;">Date: <span class="text-color:black;"> {{ $currentDate }} </span></p>
+            <p style="margin: 0; float: right; width: 50%; text-align:right;">Date: <span class="color:black !important;"> {{ $currentDate }} </span></p>
         </div>
     </div>
     
