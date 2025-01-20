@@ -106,7 +106,7 @@
               </p>
             </div>
             <div class="noc_body" style="font-size: 14px; line-height: 30px;">
-              <p style="margin-bottom: 1rem">
+              <p style="margin-bottom: 1rem; text-align:justify;">
                 This is to certify that   <span style="text-transform: capitalize;">
                     {{ $nocData->title }}
                   </span>
@@ -114,7 +114,7 @@
                   </span>
                     a Nepalese national holding 
                  Passport no  <span style="font-weight:700">{{ $nocData->national_id }}</span> is registered with registration number  <span style="font-weight:700">{{ $nocData->registration_number }}</span> as a {{ $nocData->position }} in Nepal Pharmacy Council in accordance with
-                 Nepal Pharmacy Council act, 2057 8.5.(2000 A.D).
+                 Nepal Pharmacy Council act, 2057 B.S.(2000 A.D).
                   <br /> <br />
                   {{ $nocData->title === 'mr' ? 'His' : 'Her' }} date of birth according to our record is {{ $dob }}. 
                  {{ $nocData->title === 'mr' ? 'He' : 'She' }} has passed  <span style="font-weight:700">{{ $nocData->level }}</span> from {{ $nocData->university }} 

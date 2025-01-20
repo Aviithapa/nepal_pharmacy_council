@@ -30,7 +30,9 @@
     @elseif ($data->status === 'approved')
     <div style="padding: 15px; background: lightgreen; margin: 10px 0px; border-left: 4px solid green;">
         <p style="font-weight: 700; font-size: 26px; color: black;">Your Good Standing has been approved and generated.</p>
-        <p>Please click here to download your good standing letter. <a href="{{ getImage($data->pdf_link) }}" target="_blank" class="blink" style="color: blue;">Download Now </a></p>
+        {{-- <p>Please click here to download your good standing letter. <a href="{{ getImage($data->pdf_link) }}" target="_blank" class="blink" style="color: blue;">Download Now </a></p> --}}
+        {{-- <p style="font-weight: 700; font-size: 26px; color: black;">The file is attached send to the mail.</p> --}}
+
     </div>
     @elseif ($data->status === 'rejected')
     <div style="padding: 15px; background: rgb(255, 185, 185); margin: 10px 0px; border-left: 4px solid red;">
