@@ -96,7 +96,9 @@
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
                                                 <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
                                             </a>
-                                            
+                                            <a target="_blank" href="{{ getImage($data->pdf_link) }}">
+                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">Print</span>
+                                            </a>
                                         @else
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
                                                 <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>

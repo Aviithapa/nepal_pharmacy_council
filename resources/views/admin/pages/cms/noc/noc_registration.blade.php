@@ -83,7 +83,7 @@
       <div class="noc_content">
         <!-- Ref of noc -->
         <div class="ref_container" style="width: 100%; color: #0000ff; font-weight: 600; margin-bottom: 1rem; font-style: italic;">
-            <p style="margin: 0; float: left; width: 50%;">Ref. No.: </p>
+            <p style="margin: 0; float: left; width: 50%;">Ref. No.: {{ $nocData->ref }}</p>
             <p style="margin: 0; float: right; width: 50%; text-align:right;">Date: {{ $currentDate }}</p>
         </div>
     </div>
@@ -189,7 +189,7 @@
                   <td style="width: 50%; height: 80px; text-align: center;">
                     <div style="display: inline-block; text-align: center;">
                       <img src="{{ public_path('frontend/images/signature.png') }}" height="120" width="120" style="object-fit: contain" />
-                      <h4>Sanjiv Kumar Pandey</h4>
+                      <h4>{{ $nocData->registrar_name }}</h4>
                       <h4>Registrar</h4>
                   </div>
                   </td>
