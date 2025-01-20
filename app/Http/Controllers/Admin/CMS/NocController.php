@@ -146,7 +146,7 @@ class NocController extends Controller
             if($nocData->good_standing){
                 $pdf = Pdf::loadView('admin.pages.cms.noc.good_standing', [
                     'nocData' => $nocData,
-                    'currentDate' => Carbon::now()->format('Y-m-d'),
+                    'currentDate' => Carbon::now()->format('d-m-Y'),
                     'qrCode' => $qrCodeBase64,
                     'dob' => $dobFormatted
                 ]);
