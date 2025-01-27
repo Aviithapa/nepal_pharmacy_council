@@ -414,6 +414,12 @@
                                     Select Level
                                 </option>
                                 <option 
+                                    value="Doctor of Pharmacy" 
+                                    {{ old('level', isset($applicant) ? $applicant->level : '') === 'Doctor of Pharmacy' ? 'selected' : '' }}
+                                >
+                                    Doctor of Pharmacy 
+                                </option>
+                                <option 
                                     value="Bachelor of Pharmacy (B. Pharma)" 
                                     {{ old('level', isset($applicant) ? $applicant->level : '') === 'Bachelor of Pharmacy (B. Pharma)' ? 'selected' : '' }}
                                 >
@@ -479,9 +485,7 @@
                       </tr>
                 </table>
                 <div class="mt-6">
-                    @if (isset($applicant) && ($applicant->status === 'approved'))
-                        
-                    @else
+                    
                         <button 
                             type="submit" 
                             class="w-full  text-white py-2 px-4"
@@ -489,7 +493,7 @@
                             >
                             Submit
                         </button>
-                    @endif
+                    
                
                 </div>
                 </form>
