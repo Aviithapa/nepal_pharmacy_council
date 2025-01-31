@@ -89,7 +89,7 @@
                             
                         </tr>
                         <tr>
-                            <td>National ID</td>
+                            <td>Passport No</td>
                             <td>{{ $applicant->national_id  }}</td>
                         </tr>
 

@@ -292,7 +292,7 @@ enctype="multipart/form-data"
         
             <!-- National ID -->
             <div class="col-span-2">
-                <label for="national_id">National ID No</label>
+                <label for="national_id">Passport  No</label>
                 <input 
                     type="text" 
                     name="national_id" 
@@ -300,7 +300,7 @@ enctype="multipart/form-data"
                     class="form-input w-full @error('national_id') border-red-500 @enderror" 
                     value="{{ old('national_id', isset($data) ? $data->national_id : '') }}" 
                     {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' : '' }}
-                    required
+                    
                 >
                 @error('national_id')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
