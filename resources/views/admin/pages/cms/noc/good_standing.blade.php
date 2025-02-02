@@ -82,9 +82,9 @@
       >
       <div class="noc_content">
         <!-- Ref of noc -->
-        <div class="ref_container" style="width: 100%; color: #0000ff; font-weight: 600; margin-bottom: 1rem; font-style: italic;">
-            <p style="margin: 0; float: left; width: 50%;">Ref. No.:   <span style="color:black !important;"> {{ $nocData->ref }}</span></p>
-            <p style="margin: 0; float: right; width: 50%; text-align:right;">Date: <span style="color:black !important;">{{ $currentDate }}</span></p>
+        <div class="ref_container" style="width: 100%; color: #0000ff; font-weight: 600; margin-bottom: 1rem;  font-style: italic;">
+            <p style="margin: 0; float: left; width: 50%; font-size: 16px;">Ref. No.:   <span style="color:black !important;"> {{ $nocData->ref }}</span></p>
+            <p style="margin: 0; float: right; width: 50%; text-align:right; font-size: 16px;">Date: <span style="color:black !important;">{{ $currentDate }}</span></p>
         </div>
     </div>
     
