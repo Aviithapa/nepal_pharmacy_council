@@ -51,7 +51,7 @@ class NocController extends Controller
         foreach ($statusCountsData as $status => $data) {
             $statusCounts[$status] = $data['count'];
         }
-         return view('admin.pages.cms.noc.index', compact('noc', 'request', 'statusCounts'));
+        return view('admin.pages.cms.noc.index', compact('noc', 'request', 'statusCounts'));
     }
 
     /**

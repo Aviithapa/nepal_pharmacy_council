@@ -896,6 +896,38 @@ enctype="multipart/form-data"
         
       </div>
 
+      <h2 class="section-heading mt-5">Offer Letter</h2>
+      <div class="document-grid">
+        <div class="document-item">
+          <label for="offer_letter">
+            @isset($data->offer_letter)
+                    
+            <img src="{{ getImage($data->offer_letter) }}" alt="Offer Letter">
+            @endisset
+            <p>Offer Letter*</p>
+        </label>
+        <input 
+            type="file" 
+            id="offer_letter" 
+            name="offer_letter" 
+            accept="image/*"
+            value="{{ old('offer_letter') }}"
+            {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+     
+            {{ !isset($data) && 'required' }}
+
+            
+            max="204800"
+        >
+        @error('offer_letter')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+        </div>
+         
+        
+        
+      </div>
+
       <div style="display: flex; flex-direction: column; justify-content:center; text-align: center; font-size:16px; margin-top:10px;">
         <p style=" font-weight: 700; font-size: 20px;">* Deposit Detail:  </p>
 Good Standing Letter: Nrs 500<br/>

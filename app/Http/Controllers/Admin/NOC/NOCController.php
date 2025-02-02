@@ -10,10 +10,8 @@ use App\Repositories\Media\MediaRepository;
 use App\Repositories\NocUser\NocApplicationRepository;
 use App\Repositories\User\UserRepository;
 use Exception;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class NOCController extends Controller
 {
@@ -85,6 +83,9 @@ class NOCController extends Controller
                 'plus2_character',
                 'plus2_equivalence',
                 'bank_voucher',
+                'passport_front',
+                'passport_back',
+                'offer_letter'
             ];
 
             foreach ($fileFields as $field) {
@@ -155,6 +156,9 @@ class NOCController extends Controller
                 'plus2_character',
                 'plus2_equivalence',
                 'bank_voucher',
+                'passport_front',
+                'passport_back',
+                'offer_letter'
             ];
 
             foreach ($fileFields as $field) {

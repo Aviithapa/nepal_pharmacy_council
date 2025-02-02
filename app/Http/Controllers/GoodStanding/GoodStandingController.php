@@ -80,7 +80,10 @@ class GoodStandingController extends Controller
                 'bachelor_character',
                 'bachelor_equivalence',
                 'name_registration_of_npc',
-                'name_registration_of_npc_back'
+                'name_registration_of_npc_back',
+                'passport_front',
+                'passport_back',
+                'offer_letter'
             ];
 
             foreach ($fileFields as $field) {
@@ -143,7 +146,10 @@ class GoodStandingController extends Controller
                 'bachelor_character',
                 'bachelor_equivalence',
                 'name_registration_of_npc',
-                'name_registration_of_npc_back'
+                'name_registration_of_npc_back',
+                'passport_front',
+                'passport_back',
+                'offer_letter'
             ];
 
             foreach ($fileFields as $field) {

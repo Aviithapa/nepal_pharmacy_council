@@ -82,7 +82,10 @@ class NocApplication extends Model
         'university',
         'registrar_name',
         'passed_year',
-        'name_registration_of_npc_back'
+        'name_registration_of_npc_back',
+        'passport_front',
+        'passport_back',
+        'offer_letter'
     ];
 
     /**

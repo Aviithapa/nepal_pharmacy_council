@@ -111,7 +111,6 @@ class NocController extends Controller
                     throw new \Exception('Failed to send OTP via SMS.');
                 }
             }
-          
         
             DB::commit();
     

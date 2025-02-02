@@ -1106,6 +1106,65 @@ enctype="multipart/form-data"
         
       </div>
 
+
+        
+  <h2 class="section-heading mt-5">Passport Documents</h2>
+  <div class="document-grid">
+    <div class="document-item">
+      <label for="passport_front">
+        @isset($data->passport_front)
+                
+        <img src="{{ getImage($data->passport_front) }}" alt="Passport Front">
+        @endisset
+        <p>Passport Front*</p>
+    </label>
+    <input 
+        type="file" 
+        id="passport_front" 
+        name="passport_front" 
+        accept="image/*"
+        value="{{ old('passport_front') }}"
+        {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+ 
+        {{ !isset($data) && 'required' }}
+
+        
+        max="204800"
+    >
+    @error('passport_front')
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+    </div>
+    
+    <div class="document-item">
+        <label for="passport_back">
+          @isset($data->passport_back)
+                  
+          <img src="{{ getImage($data->passport_back) }}" alt="Passport Back">
+          @endisset
+          <p>Passport Back*</p>
+      </label>
+      <input 
+          type="file" 
+          id="passport_back" 
+          name="passport_back" 
+          accept="image/*"
+          value="{{ old('passport_back') }}"
+          {{ isset($data) && ($data->status === 'pending' || $data->status === 'approved') ? 'disabled' : '' }}
+   
+          {{ !isset($data) && 'required' }}
+
+          
+          max="204800"
+      >
+      @error('passport_back')
+          <span class="text-red-500 text-sm">{{ $message }}</span>
+      @enderror
+      </div>
+    
+    
+  </div>
+
       <h2 class="section-heading mt-5">Bank Voucher</h2>
       <div class="document-grid">
         <div class="document-item">

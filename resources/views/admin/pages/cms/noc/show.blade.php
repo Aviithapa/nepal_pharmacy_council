@@ -200,7 +200,6 @@
                 </div>
             </div>
 
-           
         </div>
         <div class="col-md-12">
             <div class="col-md-12 card mb-4">
@@ -222,6 +221,21 @@
                             <td>Bank Voucher</td>
                             <td> <img src="{{  getImage($applicant->bank_voucher)}}" height="350px" /></td>
                         </tr>
+                        @if ($applicant->good_standing)
+                        <tr>
+                            <td>Passport Front</td>
+                            <td> <img src="{{  getImage($applicant->passport_front)}}" height="350px" /></td>
+                        </tr>
+                        <tr>
+                            <td>Passport Back</td>
+                            <td> <img src="{{  getImage($applicant->passport_back)}}" height="350px" /></td>
+                        </tr>
+                        @else
+                        <tr>
+                            <td>Offer Letter</td>
+                            <td> <img src="{{  getImage($applicant->offer_letter)}}" height="350px" /></td>
+                        </tr>
+                        @endif
                     </table>
                     <div class="card-header">
                         <h5>SlC Documents</h5>
@@ -409,7 +423,7 @@
                             <select 
                                 name="level" 
                                 style="padding: 5px; font-size:16px;" 
-                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'disabled' : '' }}>
+                                >
                                 <option value="" disabled {{ old('level', isset($applicant) ? $applicant->level : '') === '' ? 'selected' : '' }}>
                                     Select Level
                                 </option>
@@ -444,7 +458,7 @@
                                   name="university" 
                                   style="padding: 5px; font-size:16px;"
                                   value="{{ old('university', isset($applicant) ? $applicant->university : '') }}" 
-                                  {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+                                  
   
                               >
                               @error('university')
@@ -458,7 +472,7 @@
                                   name="registrar_name" 
                                   style="padding: 5px; font-size:16px;"
                                   value="{{ old('registrar_name', isset($applicant) ? $applicant->registrar_name : '') }}" 
-                                  {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+                                
   
                               >
                               @error('registrar_name')
@@ -475,7 +489,7 @@
                                 name="passed_year" 
                                 style="padding: 5px; font-size:16px;"
                                 value="{{ old('passed_year', isset($applicant) ? $applicant->passed_year : '') }}" 
-                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
+                               
 
                             >
                             @error('passed_year')
