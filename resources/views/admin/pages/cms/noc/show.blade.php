@@ -379,8 +379,7 @@
                         <td>
                             <select 
                                 name="position" 
-                                style="padding: 5px; font-size:16px;" 
-                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'disabled' : '' }}>
+                                style="padding: 5px; font-size:16px;" >
                                 <option value="" disabled {{ old('position', isset($applicant) ? $applicant->position : '') === '' ? 'selected' : '' }}>
                                     Select Position
                                 </option>
