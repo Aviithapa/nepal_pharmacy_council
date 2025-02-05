@@ -292,7 +292,7 @@ enctype="multipart/form-data"
         
             <!-- National ID -->
             <div class="col-span-2">
-                <label for="national_id">Password No*</label>
+                <label for="national_id">Passport No*</label>
                 <input 
                     type="text" 
                     name="national_id" 
@@ -320,6 +320,23 @@ enctype="multipart/form-data"
                     required
                 >
                 @error('issued_district')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+             <!-- Email Address -->
+             <div class="col-span-2">
+                <label for="email">Your Applied University Board / Email  </label>
+                <input 
+                    type="text" 
+                    name="email" 
+                    id="email" 
+                    class="form-input w-full @error('email') border-red-500 @enderror" 
+                    value="{{ old('email', isset($data) ? $data->email : '') }}" 
+                    {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' : '' }}
+                    required
+                >
+                @error('email')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>

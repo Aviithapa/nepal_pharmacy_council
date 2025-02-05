@@ -323,6 +323,23 @@ enctype="multipart/form-data"
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+
+              <!-- Email Address -->
+              <div class="col-span-2">
+                <label for="email">Your email  </label>
+                <input 
+                    type="text" 
+                    name="email" 
+                    id="email" 
+                    class="form-input w-full @error('email') border-red-500 @enderror" 
+                    value="{{ old('email', isset($data) ? $data->email : '') }}" 
+                    {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' : '' }}
+                    required
+                >
+                @error('email')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
         </div>
         
   

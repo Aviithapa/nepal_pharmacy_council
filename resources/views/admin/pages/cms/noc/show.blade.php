@@ -111,6 +111,21 @@
                                 <td>{{ $applicant->registration_number  }}</td>
                             </tr>
                         @endif
+
+                        @if ($applicant->good_standing)
+                        <tr>
+                            <td>Your Applied University Board / Email </td>
+                            <td>{{ $applicant->email  }}</td>
+                        </tr>
+                        @else
+                        <tr>
+                            <td> Email </td>
+                            <td>{{ $applicant->email  }}</td>
+                        </tr>
+                    @endif
+
+                        
+
                         
                     </table>
                 </div>
