@@ -72,7 +72,13 @@
                                                             </td>
                                                             <td>
                                                                 <a href="{{ route('news.edit', ['news' => $data->id]) }}"><span class="badge bg-info-subtle text-info">Edit</span></a>
-                                                                <a  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat"  data-attr="{{ route('news.destroy', ['news' => $data->id]) }}" style="cursor: pointer;"><span class="badge bg-danger-subtle text-danger">Delete</span></a>                                                            
+                                                                <a  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat"  data-attr="{{ route('news.destroy', ['news' => $data->id]) }}" style="cursor: pointer;"><span class="badge bg-danger-subtle text-danger">Delete</span></a>   
+                                                                @if($data->status === 'pending' && Auth::user()->mainRole()->name === 'super_admin')
+                                                                <form action="{{ route('news.approve', ['id' => $data->id]) }}" method="POST" style="display:inline;">
+                                                                    @csrf
+                                                                    <button type="submit" class="badge bg-success-subtle text-success border-0">Approve</button>
+                                                                </form>
+                                                            @endif
                                                             </td>
 
                                                         </tr>

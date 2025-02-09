@@ -99,16 +99,21 @@
                                             <a target="_blank" href="{{ getImage($data->pdf_link) }}">
                                                 <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">Print</span>
                                             </a>
-                                            <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
-                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Re Generate</span>
-                                            </a>
+                                            @if (Auth::user()->mainRole()->name === 'super_admin')
+                                                <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
+                                                    <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Re Generate</span>
+                                                </a>
+                                            @endif
+                                            
                                         @else
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
                                                 <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
                                             </a>
+                                            @if (Auth::user()->mainRole()->name === 'super_admin')
                                             <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
                                                 <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Approve</span>
                                             </a>
+                                            @endif
                                             <a class="btn-reject" data-id="{{ $data->id }}" data-status="rejected" style="cursor: pointer;">
                                                 <span class="badge bg-danger-subtle text-danger" style="font-size: 18px; text-transform: capitalize;">Reject</span>
                                             </a>

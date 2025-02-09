@@ -129,33 +129,17 @@
                         </a>
                     </li>
 
-                    <li class="side-nav-item">
-                        <a href="{{ url('cms/banner') }}" class="side-nav-link">
-                            <i class="bi-calendar-week-fill"></i>
-                            <span> Banner Management </span>
-                        </a>
-                    </li>
+                    
+
                     <li class="side-nav-item">
                         <a href="{{ url('cms/news') }}" class="side-nav-link">
                             <i class="bi-book"></i>
                             <span> News Management </span>
                         </a>
                     </li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('cms/bod') }}" class="side-nav-link">
-                            <i class="bi-person"></i>
-                            <span> Board Members</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('cms/staff') }}" class="side-nav-link">
-                            <i class="bi-people-fill"></i>
-                            <span> Staff Management</span>
-                        </a>
-                    </li>
 
                     
-                    <li class="side-nav-item">
+                    {{-- <li class="side-nav-item">
                         <a href="{{ url('cms/cpd') }}" class="side-nav-link">
                             <i class="bi-bar-chart"></i>
                             <span>CPD Activites</span>
@@ -188,8 +172,8 @@
                             <i class="bi-printer"></i>
                             <span>Regulation Management</span>
                         </a>
-                    </li>
-
+                    </li>  
+                    
                     <li class="side-nav-item">
                         <a href="{{ url('cms/coc') }}" class="side-nav-link">
                             <i class="bi-printer"></i>
@@ -202,7 +186,7 @@
                             <i class="bi-image"></i>
                             <span> Gallery Management </span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="side-nav-item">
                         <a href="{{ url('cms/college') }}" class="side-nav-link">
@@ -212,12 +196,12 @@
                     </li>
 
 
-                    <li class="side-nav-item">
+                    {{-- <li class="side-nav-item">
                         <a href="{{ url('cms/page') }}" class="side-nav-link">
                             <i class="bi-file"></i>
                             <span> Page Management </span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="side-nav-item">
                         <a href="{{ url('cms/post') }}" class="side-nav-link">
@@ -227,9 +211,9 @@
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="{{ url('cms/testimonial') }}" class="side-nav-link">
-                            <i class="bi-chat-left-dots"></i>
-                            <span> Testimonial Management </span>
+                        <a href="{{ route('change.password') }}" class="side-nav-link">
+                            <i class="bi-gear"></i>
+                            <span> Password Change </span>
                         </a>
                     </li>
                     

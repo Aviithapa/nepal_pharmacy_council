@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class CheckSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !in_array(Auth::user()->mainRole()->name, ['admin', 'super_admin'])) {
-            return redirect('/dashboard'); // Redirect if not admin or super admin
+        if (!Auth::check() || Auth::user()->mainRole()->name !== 'super_admin') {
+            return redirect('/dashboard'); // Redirect if not admin
         }
-    
 
         return $next($request);
     }

@@ -26,13 +26,14 @@ use App\Http\Controllers\Admin\Inquiry\InquiryController;
 use App\Http\Controllers\Admin\NOC\NOCController;
 use App\Http\Controllers\Admin\Settings\SiteSettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\GoodStanding\GoodStandingController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::resource('dashboard/user', UserController::class)->middleware(['auth']);
 
 // CMS 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin:admin,super_admin'])->group(function () {
     Route::resource('cms/menu', MenuController::class);
     Route::resource('cms/post', PostController::class);
     Route::resource('cms/news', NewsController::class);
@@ -53,30 +54,34 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('cms/noc-main', CMSNocController::class)->only('index', 'show', 'update');
     Route::put('cms/noc-approve/{id}', [CMSNocController::class, 'approve'])->name('noc.approve');
     Route::post('cms/store-data', [CMSNocController::class, 'storeData'])->name('applicant.store');
-
-    
     Route::resource('inquiry', InquiryController::class)->only('index');
     Route::post('quickNews', [NewsController::class, 'storeQuickNews'])->name('quick.news');
     Route::delete('mediaDestroy/{media}', [NewsController::class, 'mediaDestroy'])->name('media.destroy');
     Route::put('updateMessage/{post}', [PostController::class, 'updateMessage'])->name('update.message');
     Route::post('uploadResult', [NewsController::class, 'uploadResult'])->name('upload.result');
+    Route::resource('site-settings', SiteSettingController::class, [
+        'names' => [
+            'index' => 'dashboard.site-settings.index',
+            'create' => 'dashboard.site-settings.create',
+            'store' => 'dashboard.site-settings.store',
+            'show' => 'dashboard.site-settings.show',
+            'update' => 'dashboard.site-settings.update',
+            'edit' => 'dashboard.site-settings.edit',
+            'destroy' => 'dashboard.site-settings.destroy',
+        ]
+    ]);
+    Route::get('change-password', [PasswordResetController::class, 'showChangePassword'])->name('change.password');
+    Route::post('change-password', [PasswordResetController::class, 'updatePassword'])->name('password.update');
+
 });
 
 
+Route::post('news/approve/{id}', [NewsController::class, 'approve'])
+    ->middleware('admin:super_admin')
+    ->name('news.approve');
 
-Route::resource('site-settings', SiteSettingController::class, [
-    'names' => [
-        'index' => 'dashboard.site-settings.index',
-        'create' => 'dashboard.site-settings.create',
-        'store' => 'dashboard.site-settings.store',
-        'show' => 'dashboard.site-settings.show',
-        'update' => 'dashboard.site-settings.update',
-        'edit' => 'dashboard.site-settings.edit',
-        'destroy' => 'dashboard.site-settings.destroy',
-    ]
-]);
 
-//NOC
+
+//NOC Normal User
 Route::resource('backend/noc', NOCController::class)->middleware(['auth']);
-
 Route::resource('backend/good-standing', GoodStandingController::class)->middleware(['auth']);

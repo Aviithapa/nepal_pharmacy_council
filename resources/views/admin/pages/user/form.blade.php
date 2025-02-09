@@ -47,6 +47,15 @@
                                                       @endif
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="validationCustom01">Password </label>
+                                                    <input type="password" class="form-control" id="validationCustom01" placeholder="password" name="password"  required value={{ isset($model) ? $model->password : old('password') }}>
+                                                     @if($errors->any())
+                                                         {{ $errors->first('password') }}
+                                                      @endif
+                                                </div>
+                                            </div>
                                              <div class="col-lg-6 col-md-6 col-sm-12"> 
                                                 <div class="mb-3">
                                                     <label class="form-label" for="validationCustom01">Role</label>

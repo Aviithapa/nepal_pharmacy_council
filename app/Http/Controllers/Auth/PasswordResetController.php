@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ResetPasswordOtp;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Mockery\Expectation;
 
 class PasswordResetController extends Controller
 {
@@ -111,5 +109,31 @@ class PasswordResetController extends Controller
 
         // Redirect the user to the login page with a success message
         return redirect()->route('login')->with('success', 'Password reset successfully. You can now log in with your new password.');
+    }
+
+    public function showChangePassword()
+    {
+        return view('admin.pages.password.change-password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'min:6'],
+            'new_password' => ['required', 'min:6', 'different:current_password'],
+            'confirm_password' => ['required', 'same:new_password'],
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return back()->with('success', 'Password changed successfully.');
     }
 }

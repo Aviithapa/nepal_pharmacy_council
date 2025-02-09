@@ -35,6 +35,9 @@ class DashboardController extends Controller
             case 'admin':
                 return view('admin.dashboard.admin', compact('registrar', 'chairman', 'settings'));
                 break;
+            case 'super_admin':
+                return view('admin.dashboard.super-admin', compact('registrar', 'chairman', 'settings'));
+                break;
             case 'noc_user':
                 return redirect()->route('noc.index');
                  break;

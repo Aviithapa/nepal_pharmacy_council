@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = $this->userRepository->getPaginatedList($request);
+        $users = $this->userRepository->getPaginatedList($request, 'user');
         $roles = Role::all();
         return view('admin.pages.user.index', compact('users', 'request', 'roles'));
     }
@@ -47,7 +47,6 @@ class UserController extends Controller
         try {
             $data['token'] = str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
             $role = Role::where('name', $data['role'])->first();
-            $data['password'] = $this->generateRandomAlphabeticString(8);
             $data['reference'] = $data['password'];
             $data['password'] = bcrypt($data['password']);
             $data['phone_number'] = $data['token'];
@@ -57,9 +56,9 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
             $user->roles()->attach($role);
-            Mail::to($user->email)->send(new AdminCreateUser($user));
+            // Mail::to($user->email)->send(new AdminCreateUser($user));
             session()->flash('success', 'Account has been created successfully.');
-            return redirect()->route('dashboard.user.index');
+            return redirect()->route('user.index');
         } catch (Exception $e) {
             session()->flash('danger', 'Oops! Something went wrong.');
             return redirect()->back()->withInput();

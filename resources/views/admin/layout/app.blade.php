@@ -17,6 +17,9 @@
 <body>
     <div class="wrapper">
         @switch(Auth::user()->mainRole()->name)
+            @case('super_admin')
+                @include('admin.sidebar.super-admin')
+            @break
             @case('admin')
                 @include('admin.sidebar.sidebar')
             @break

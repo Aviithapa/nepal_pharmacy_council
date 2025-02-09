@@ -14,7 +14,10 @@ class News extends Model
     use HasFilter;
 
     protected $table = 'news';
-    protected $fillable = ['title', 'content', 'excerpt', 'image', 'type', 'slug', 'created_by', 'deleted_at', 'is_popup'];
+    protected $fillable = ['title', 'content', 'excerpt', 'image', 'type', 'slug', 'created_by', 'deleted_at', 'is_popup', 'status'];
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_APPROVED = 'approved';
 
     public function getImage()
     {

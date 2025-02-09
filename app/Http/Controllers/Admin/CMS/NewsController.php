@@ -6,6 +6,7 @@ use App\Client\FileUpload\FileUploaderInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\News\CreateNewsRequest;
 use App\Imports\ResultUploadImport;
+use App\Models\News;
 use App\Repositories\Media\MediaRepository;
 use App\Repositories\News\NewsRepository;
 use Exception;
@@ -63,6 +64,8 @@ class NewsController extends Controller
             $data['type'] = 'news';
             $data['slug'] = generateSlug($data['title']);
             $data['created_by'] = Auth::user()->id;
+            $data['status'] = Auth::user()->mainRole()->name === 'admin' ? News::STATUS_PENDING : News::STATUS_APPROVED;
+
             $news = $this->newsRepository->store($data);
             if (isset($data['files']) && count($data['files']) > 0) {
                 foreach ($data['files'] as $file) {
@@ -261,5 +264,18 @@ class NewsController extends Controller
             session()->flash('danger', 'Oops! Something went wrong.' . $e);
             return redirect()->back()->withInput();
         }
+    }
+
+    public function approve($id)
+    {
+        $news = News::findOrFail($id);
+
+        if (Auth::user()->mainRole()->name !== 'super_admin') {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+
+        $news->update(['status' => News::STATUS_APPROVED]);
+
+        return redirect()->back()->with('success', 'News approved successfully.');
     }
 }
