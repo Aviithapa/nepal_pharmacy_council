@@ -227,10 +227,11 @@ class NocController extends Controller
         }
 
       
-
+        $applicant = $this->nocApplicationRepository->findOrFail($userId);
+ 
 
         // Load a PDF view and pass the image paths to it
-        $pdf = PDF::loadView('pdf.images', ['images' => $imagePaths, 'userId' => $userId]);
+        $pdf = PDF::loadView('pdf.images', ['images' => $imagePaths, 'userId' => $userId, 'applicant' => $applicant]);
 
         // Return the generated PDF for download
         return $pdf->download("images_{$userId}.pdf");
