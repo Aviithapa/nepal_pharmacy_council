@@ -203,10 +203,10 @@ class NocController extends Controller
 
     public function downloadImages($userId)
     {
-        // dd('here');
-        // Path to the folder containing images (adjust the folder structure as needed)
+         // Path to the folder containing images (adjust the folder structure as needed)
         $folderPath = storage_path("app/public/noc/{$userId}/"); // This is the folder path where the images are stored
-         // Check if the folder exists
+        
+        // Check if the folder exists
         if (!File::exists($folderPath)) {
             return response()->json(['error' => 'Folder not found.'], 404);
         }
@@ -214,32 +214,25 @@ class NocController extends Controller
         // Get all image files in the folder
         $images = File::files($folderPath);
 
-
-
         // Check if there are images in the folder
         if (count($images) === 0) {
             return response()->json(['error' => 'No images found.'], 404);
         }
 
-        // Create a temporary file to store the ZIP
-        $zipFileName = "images_{$userId}.zip";
-        $zipFilePath = storage_path("app/public/{$zipFileName}");
-
-        // Create a new ZIP archive
-        $zip = new ZipArchive();
-        if ($zip->open($zipFilePath, ZipArchive::CREATE) === TRUE) {
-            // Add each image file to the ZIP
-            foreach ($images as $image) {
-                $zip->addFile($image, basename($image)); // Add file to the ZIP with the original name
-            }
-
-            // Close the ZIP archive
-            $zip->close();
-
-            // Return the ZIP file as a download response
-            return response()->download($zipFilePath)->deleteFileAfterSend(true);
-        } else {
-            return response()->json(['error' => 'Failed to create ZIP file.'], 500);
+        // Prepare the images data for the PDF (array of image paths)
+        $imagePaths = [];
+        foreach ($images as $image) {
+            // You can store the relative path or full URL depending on your requirement
+            $imagePaths[] = asset('storage/noc/' . $userId . '/' . basename($image));
         }
+
+      
+
+
+        // Load a PDF view and pass the image paths to it
+        $pdf = PDF::loadView('pdf.images', ['images' => $imagePaths, 'userId' => $userId]);
+
+        // Return the generated PDF for download
+        return $pdf->download("images_{$userId}.pdf");
     }
 }
