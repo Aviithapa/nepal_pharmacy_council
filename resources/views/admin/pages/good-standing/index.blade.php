@@ -289,6 +289,8 @@ enctype="multipart/form-data"
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>
+
+            
         
             <!-- National ID -->
             <div class="col-span-2">
@@ -320,6 +322,22 @@ enctype="multipart/form-data"
                     required
                 >
                 @error('issued_district')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="col-span-2">
+                <label for="address_to_be_applied">Address to be applied</label>
+                <input 
+                    type="text" 
+                    name="address_to_be_applied" 
+                    id="address_to_be_applied" 
+                    class="form-input w-full @error('address_to_be_applied') border-red-500 @enderror" 
+                    value="{{ old('address_to_be_applied', isset($data) ? $data->address_to_be_applied : '') }}" 
+                    {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved') ? 'readonly' : '' : '' }}
+                    required
+                >
+                @error('address_to_be_applied')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
             </div>

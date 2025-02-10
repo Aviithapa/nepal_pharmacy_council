@@ -65,9 +65,9 @@
             <div class="card-body p-0">
                 <div class="p-3">
                     <div class="card-widgets">
-                        {{-- <a href="{{ route('service.create') }}" class="btn btn-primary" style="color: white;">Create New Service</a> --}}
+                        <a href="{{ url('export-data') }}" class="btn btn-primary" style="color: white;">Export Data</a>
                     </div>
-                    <h5 class="header-title mb-0">Service List</h5>
+                    <h5 class="header-title mb-0">Noc data  List</h5>
                 </div>
 
                 <div id="yearly-sales-collapse" class="collapse show">
@@ -80,7 +80,7 @@
                                     <th>Name</th>
                                     <th>NPC Enlisted</th>
                                     <th>Type</th>
-
+                                    <th>Applied Date</th>
                                     <th>Dob</th>
                                     <th>Citizenship</th>
                                     <th>Phone Number</th>
@@ -122,6 +122,7 @@
                                     <td>{{ $data->title . ' ' . $data->first_name . ' ' . $data->middle_name . ' ' . $data->last_name }}</td>
                                     <td>{{ $data->npc_enlisted }}</td>
                                     <td><span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">{{ $data->good_standing ? 'Good Standing' : 'NOC' }}</span></td>
+                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->format('Y-m-d') }}                                    </td>
                                     <td>{{ $data->dob_ad . ' AD ' . $data->dob_bs . ' BS' }}</td>
                                     <td>{{ $data->citizenship }}</td>
                                     <td>{{ $data->user->email }}</td>

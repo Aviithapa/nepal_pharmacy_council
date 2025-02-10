@@ -2,6 +2,7 @@
 
 //Route Dashboard
 
+use App\Exports\NocDataExport;
 use App\Http\Controllers\Admin\CMS\BannerController;
 use App\Http\Controllers\Admin\CMS\BODController;
 use App\Http\Controllers\Admin\CMS\CodeOfConductController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Admin\Settings\SiteSettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\GoodStanding\GoodStandingController;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 Route::resource('dashboard/user', UserController::class)->middleware(['auth']);
@@ -79,6 +81,10 @@ Route::middleware(['auth', 'admin:admin,super_admin'])->group(function () {
 Route::post('news/approve/{id}', [NewsController::class, 'approve'])
     ->middleware('admin:super_admin')
     ->name('news.approve');
+
+    Route::get('export-data', function () {
+        return Excel::download(new NocDataExport, 'noc_data.xlsx');
+    });
 
 
 

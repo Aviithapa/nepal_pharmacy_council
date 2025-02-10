@@ -110,6 +110,11 @@
                                 <td>NPC Registration Number</td>
                                 <td>{{ $applicant->registration_number  }}</td>
                             </tr>
+                            <tr>
+                                <td>Address to be applied</td>
+                                <td>{{ $applicant->address_to_be_applied  }}</td>
+                            </tr>
+                            
                         @endif
 
                         @if ($applicant->good_standing)

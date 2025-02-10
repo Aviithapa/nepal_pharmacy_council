@@ -86,7 +86,8 @@ class NocApplication extends Model
         'passport_front',
         'passport_back',
         'offer_letter',
-        'email'
+        'email',
+        'address_to_be_applied'
     ];
 
     /**
