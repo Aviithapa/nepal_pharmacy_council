@@ -6,14 +6,14 @@ use App\Models\NocApplication;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class NocDataExport implements FromCollection, WithHeadings
+class GoodStandingDataExport implements FromCollection, WithHeadings
 {
-    /**
+     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-       return NocApplication::where('good_standing', false)
+       return NocApplication::where('good_standing', true)
        ->get([
            'first_name',
            'middle_name',

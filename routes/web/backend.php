@@ -2,6 +2,7 @@
 
 //Route Dashboard
 
+use App\Exports\GoodStandingDataExport;
 use App\Exports\NocDataExport;
 use App\Http\Controllers\Admin\CMS\BannerController;
 use App\Http\Controllers\Admin\CMS\BODController;
@@ -82,9 +83,15 @@ Route::post('news/approve/{id}', [NewsController::class, 'approve'])
     ->middleware('admin:super_admin')
     ->name('news.approve');
 
-    Route::get('export-data', function () {
+    Route::get('export-data-noc', function () {
         return Excel::download(new NocDataExport, 'noc_data.xlsx');
     });
+
+    Route::get('export-data-good', function () {
+        return Excel::download(new GoodStandingDataExport, 'good_standing_data.xlsx');
+    });
+
+    Route::get('/download-images/{userId}', [CMSNocController::class, 'downloadImages']);
 
 
 

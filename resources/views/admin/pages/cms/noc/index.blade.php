@@ -65,7 +65,9 @@
             <div class="card-body p-0">
                 <div class="p-3">
                     <div class="card-widgets">
-                        <a href="{{ url('export-data') }}" class="btn btn-primary" style="color: white;">Export Data</a>
+                        <a href="{{ url('export-data-noc') }}" class="btn btn-primary" style="color: white;">Export Data Noc</a>
+                        <a href="{{ url('export-data-good') }}" class="btn btn-primary" style="color: white;">Export Data Good Standing</a>
+
                     </div>
                     <h5 class="header-title mb-0">Noc data  List</h5>
                 </div>
@@ -104,6 +106,9 @@
                                                     <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Re Generate</span>
                                                 </a>
                                             @endif
+                                            <a class="download" href="{{ url('download-images/' .$data->id) }}" data-status="download" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
+                                            </a>
                                             
                                         @else
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
@@ -114,6 +119,9 @@
                                                 <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Approve</span>
                                             </a>
                                             @endif
+                                            <a class="download" href="{{ url('download-images/' .$data->id) }}"data-status="download" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
+                                            </a>
                                             <a class="btn-reject" data-id="{{ $data->id }}" data-status="rejected" style="cursor: pointer;">
                                                 <span class="badge bg-danger-subtle text-danger" style="font-size: 18px; text-transform: capitalize;">Reject</span>
                                             </a>
