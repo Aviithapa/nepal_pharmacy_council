@@ -97,4 +97,10 @@ class NocApplication extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function getCreatedAtFormattedAttribute()
+    {
+        return $this->created_at->format('Y-m-d');
+    }
+
 }

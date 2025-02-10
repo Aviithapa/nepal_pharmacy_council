@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\NocApplication;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -13,59 +14,99 @@ class NocDataExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-       return NocApplication::where('good_standing', false)
-       ->get([
-           'first_name',
-           'middle_name',
-           'last_name',
-           'first_name_nepali',
-           'middle_name_nepali',
-           'last_name_nepali',
-           'title',
-           'dob_ad',
-           'dob_bs',
-           'father_name',
-           'mother_name',
-           'gender',
-           'citizenship',
-           'national_id',
-           'issued_district',
-           'district',
-           'municipality',
-           'ward',
-           'tole',
-           'slc_institute',
-           'slc_year',
-           'slc_grade',
-           'slc_reg_no',
-           'slc_remarks',
-           'plus2_institute',
-           'plus2_year',
-           'plus2_grade',
-           'plus2_reg_no',
-           'plus2_remarks',
-           'applied_college',
-           'applied_university',
-           'npc_enlisted',
-           'status',
-           'remarks',
-           'ref',
-           'good_standing',
-           'bachelor_institute',
-           'bachelor_year',
-           'bachelor_grade',
-           'bachelor_reg_no',
-           'bachelor_remarks',
-           'position',
-           'registration_number',
-           'level',
-           'university',
-           'registrar_name',
-           'passed_year',
-           'email'
-       ]);
-   
+        return NocApplication::where('good_standing', false)
+            ->get([
+                'first_name',
+                'middle_name',
+                'last_name',
+                'first_name_nepali',
+                'middle_name_nepali',
+                'last_name_nepali',
+                'title',
+                'dob_ad',
+                'dob_bs',
+                'father_name',
+                'mother_name',
+                'gender',
+                'citizenship',
+                'national_id',
+                'issued_district',
+                'district',
+                'municipality',
+                'ward',
+                'tole',
+                'slc_institute',
+                'slc_year',
+                'slc_grade',
+                'slc_reg_no',
+                'slc_remarks',
+                'plus2_institute',
+                'plus2_year',
+                'plus2_grade',
+                'plus2_reg_no',
+                'plus2_remarks',
+                'applied_college',
+                'applied_university',
+                'npc_enlisted',
+                'status',
+                'remarks',
+                'ref',
+                'position',
+                'registration_number',
+                'university',
+                'registrar_name',
+                'passed_year',
+                'email',
+                'created_at'
+            ])
+            ->transform(function ($noc) {
+                return [
+                    'first_name' => $noc->first_name,
+                    'middle_name' => $noc->middle_name,
+                    'last_name' => $noc->last_name,
+                    'first_name_nepali' => $noc->first_name_nepali,
+                    'middle_name_nepali' => $noc->middle_name_nepali,
+                    'last_name_nepali' => $noc->last_name_nepali,
+                    'title' => $noc->title,
+                    'dob_ad' => $noc->dob_ad,
+                    'dob_bs' => $noc->dob_bs,
+                    'father_name' => $noc->father_name,
+                    'mother_name' => $noc->mother_name,
+                    'gender' => $noc->gender,
+                    'citizenship' => $noc->citizenship,
+                    'national_id' => $noc->national_id,
+                    'issued_district' => $noc->issued_district,
+                    'district' => $noc->district,
+                    'municipality' => $noc->municipality,
+                    'ward' => $noc->ward,
+                    'tole' => $noc->tole,
+                    'slc_institute' => $noc->slc_institute,
+                    'slc_year' => $noc->slc_year,
+                    'slc_grade' => $noc->slc_grade,
+                    'slc_reg_no' => $noc->slc_reg_no,
+                    'slc_remarks' => $noc->slc_remarks,
+                    'plus2_institute' => $noc->plus2_institute,
+                    'plus2_year' => $noc->plus2_year,
+                    'plus2_grade' => $noc->plus2_grade,
+                    'plus2_reg_no' => $noc->plus2_reg_no,
+                    'plus2_remarks' => $noc->plus2_remarks,
+                    'applied_college' => $noc->applied_college,
+                    'applied_university' => $noc->applied_university,
+                    'npc_enlisted' => $noc->npc_enlisted,
+                    'status' => $noc->status,
+                    'remarks' => $noc->remarks,
+                    'ref' => $noc->ref,
+                    'position' => $noc->position,
+                    'registration_number' => $noc->registration_number,
+                    'university' => $noc->university,
+                    'registrar_name' => $noc->registrar_name,
+                    'passed_year' => $noc->passed_year,
+                    'email' => $noc->email,
+                    'created_at' => Carbon::parse($noc->created_at)->format('Y-m-d'), // Convert to YYYY-MM-DD
+                ];
+            });
     }
+     
 
     public function headings(): array
     {
@@ -105,20 +146,13 @@ class NocDataExport implements FromCollection, WithHeadings
             'Status',
             'Remarks',
             'Reference',
-            'UUID',
-            'Good Standing',
-            'Bachelor Institute',
-            'Bachelor Year',
-            'Bachelor Grade',
-            'Bachelor Registration Number',
-            'Bachelor Remarks',
             'Position',
             'Registration Number',
-            'Level',
             'University',
             'Registrar Name',
             'Passed Year',
-            'Email'
+            'Email',
+            'Applied At'
         ];
     }
 }
