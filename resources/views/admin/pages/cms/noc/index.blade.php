@@ -4,15 +4,16 @@
 
 @include('admin.component.breadcrumb', ['title' => "Service Management"])
 <style>
-    @keyframes blink {
-    0% { background-color: #ffdddd; }
-    50% { background-color: #ffffff; }
-    100% { background-color: #ffdddd; }
+@keyframes smoothBlink {
+    0% { background-color: #c1bdff; opacity: 1; }
+    50% { background-color: #ffffff; opacity: 0.7; }
+    100% { background-color: #c0c2fb; opacity: 1; }
 }
 
 .blink-row {
-    animation: blink 1s infinite;
+    animation: smoothBlink 2s infinite ease-in-out;
 }
+
 
 </style>
 <div class="row">
@@ -106,7 +107,7 @@
                                     $createdAt = \Carbon\Carbon::parse($data->created_at);
                                     $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
                                 @endphp
-                                <tr class="{{ $isRecent ? 'blink-row' : '' }}">
+                                <tr class="{{ $isRecent ? 'blink-row' : 'blink-row' }}">
                                     <td>{{ $data->id }}</td>
                                     <td>
                                         @if ($data->status === 'approved')
