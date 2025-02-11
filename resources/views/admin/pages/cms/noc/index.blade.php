@@ -3,7 +3,18 @@
 @section('content')
 
 @include('admin.component.breadcrumb', ['title' => "Service Management"])
+<style>
+    @keyframes blink {
+    0% { background-color: #ffdddd; }
+    50% { background-color: #ffffff; }
+    100% { background-color: #ffdddd; }
+}
 
+.blink-row {
+    animation: blink 1s infinite;
+}
+
+</style>
 <div class="row">
     @foreach ($statusCounts as $status => $count)
         <div class="col-md-4">
@@ -91,7 +102,11 @@
                             </thead>
                             <tbody>
                                 @foreach($noc as $data)
-                                <tr>
+                                @php
+                                    $createdAt = \Carbon\Carbon::parse($data->created_at);
+                                    $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
+                                @endphp
+                                <tr class="{{ $isRecent ? 'blink-row' : '' }}">
                                     <td>{{ $data->id }}</td>
                                     <td>
                                         @if ($data->status === 'approved')
