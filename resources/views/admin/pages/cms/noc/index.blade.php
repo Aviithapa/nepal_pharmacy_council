@@ -11,7 +11,8 @@
 }
 
 .blink-row {
-    animation: smoothBlink 2s infinite ease-in-out;
+    background: #cdcfff !important;  
+    color: white !important;
 }
 
 
