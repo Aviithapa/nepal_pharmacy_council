@@ -107,7 +107,7 @@
                                     $createdAt = \Carbon\Carbon::parse($data->created_at);
                                     $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
                                 @endphp
-                                <tr class="{{ $isRecent ? 'blink-row' : 'blink-row' }}">
+                                <tr class="{{ $isRecent ? 'blink-row' : '' }}">
                                     <td>{{ $data->id }}</td>
                                     <td>
                                         @if ($data->status === 'approved')
