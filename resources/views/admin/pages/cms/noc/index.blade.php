@@ -51,7 +51,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            {{-- <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="mb-3">
                     <select class="form-control" id="statusSelect" name="good_standing">
                         <option value="" {{ request()->get('good_standing') === null ? 'selected' : '' }}>Select Type</option>
@@ -59,7 +59,7 @@
                         <option value="0" {{ request()->get('good_standing') == 0 ? 'selected' : '' }}>NOC</option>
                      </select>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="validationCustom01" placeholder="Citizenship" name="citizenship" value="{{ request()->get('citizenship') }}">
@@ -73,16 +73,17 @@
 </div>
 
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-6 col-lg-6 col-md-12">
+
         <div class="card">
             <div class="card-body p-0">
                 <div class="p-3">
                     <div class="card-widgets">
+                     
                         <a href="{{ url('export-data-noc') }}" class="btn btn-primary" style="color: white;">Export Data Noc</a>
-                        <a href="{{ url('export-data-good') }}" class="btn btn-primary" style="color: white;">Export Data Good Standing</a>
-
+ 
                     </div>
-                    <h5 class="header-title mb-0">Noc data  List</h5>
+                    <h5 class="header-title mb-0">NOC List</h5>
                 </div>
 
                 <div id="yearly-sales-collapse" class="collapse show">
@@ -103,13 +104,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($noc as $data)
+                                @foreach($noc as $index =>  $data)
+                                     
+                            
                                 @php
                                     $createdAt = \Carbon\Carbon::parse($data->created_at);
                                     $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
                                 @endphp
                                 <tr class="{{ $isRecent ? 'blink-row' : '' }}">
-                                    <td>{{ $data->id }}</td>
+                                    <td>{{ $index++ }}</td>
                                     <td>
                                         @if ($data->status === 'approved')
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
@@ -158,6 +161,100 @@
                         </table>
                         <div style="padding: 10px; float:right;">
                             {{ $noc->appends(request()->query())->links('admin.layout.pagination') }}
+                        </div>
+                    </div>
+                </div>
+            </div>                           
+        </div> 
+    </div>
+
+    <div class="col-xl-6 col-lg-6 col-md-12">
+
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="p-3">
+                    <div class="card-widgets">
+                        {{-- <a href="{{ url('export-data-noc') }}" class="btn btn-primary" style="color: white;">Export Data Noc</a> --}}
+                        <a href="{{ url('export-data-good') }}" class="btn btn-primary" style="color: white;">Export Data Good Standing</a>
+
+                    </div>
+                    <h5 class="header-title mb-0">Good Standing Letter  List</h5>
+                </div>
+
+                <div id="yearly-sales-collapse" class="collapse show">
+                    <div class="table-responsive">
+                        <table class="table table-nowrap table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>NPC Enlisted</th>
+                                    <th>Type</th>
+                                    <th>Applied Date</th>
+                                    <th>Dob</th>
+                                    <th>Citizenship</th>
+                                    <th>Phone Number</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($goodStanding as $index =>  $data)
+                                @php
+                                    $createdAt = \Carbon\Carbon::parse($data->created_at);
+                                    $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
+                                @endphp
+                                <tr class="{{ $isRecent ? 'blink-row' : '' }}">
+                                    <td>{{ $index++ }}</td>
+                                    <td>
+                                        @if ($data->status === 'approved')
+                                            <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
+                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
+                                            </a>
+                                            <a target="_blank" href="{{ getImage($data->pdf_link) }}">
+                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">Print</span>
+                                            </a>
+                                            @if (Auth::user()->mainRole()->name === 'super_admin')
+                                                <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
+                                                    <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Re Generate</span>
+                                                </a>
+                                            @endif
+                                            <a class="download" href="{{ url('download-images/' .$data->id) }}" data-status="download" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
+                                            </a>
+                                            
+                                        @else
+                                            <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
+                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
+                                            </a>
+                                            @if (Auth::user()->mainRole()->name === 'super_admin')
+                                            <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Approve</span>
+                                            </a>
+                                            @endif
+                                            <a class="download" href="{{ url('download-images/' .$data->id) }}"data-status="download" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
+                                            </a>
+                                            <a class="btn-reject" data-id="{{ $data->id }}" data-status="rejected" style="cursor: pointer;">
+                                                <span class="badge bg-danger-subtle text-danger" style="font-size: 18px; text-transform: capitalize;">Reject</span>
+                                            </a>
+                                        @endif
+                                    </td>
+                                    <td>{{ $data->title . ' ' . $data->first_name . ' ' . $data->middle_name . ' ' . $data->last_name }}</td>
+                                    <td>{{ $data->npc_enlisted }}</td>
+                                    <td><span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">{{ $data->good_standing ? 'Good Standing' : 'NOC' }}</span></td>
+                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->format('Y-m-d') }}                                    </td>
+                                    <td>{{ $data->dob_ad . ' AD ' . $data->dob_bs . ' BS' }}</td>
+                                    <td>{{ $data->citizenship }}</td>
+                                    <td>{{ $data->user->email }}</td>
+                                    <td>{{ $data->status }}</td>
+                                </tr>
+                            
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div style="padding: 10px; float:right;">
+                            {{ $goodStanding->appends(request()->query())->links('admin.layout.pagination') }}
                         </div>
                     </div>
                 </div>

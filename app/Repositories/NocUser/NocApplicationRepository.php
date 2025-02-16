@@ -30,11 +30,9 @@ class NocApplicationRepository extends Repository
         $limit = $request->get('limit', config('app.per_page'));
         return $this->model->newQuery()->when(!$request->has('status'), function ($query) {
             $query->where('status', 'pending'); // Default condition for pending records
-        })
-            ->latest()
-            
-            ->filter(new NocFilter($request))
-            ->paginate($limit);
+        })->where('good_standing', false)->latest()
+        ->filter(new NocFilter($request))
+        ->paginate($limit);
     }
 
     public function getStatusCounts($statuses)
@@ -51,5 +49,21 @@ class NocApplicationRepository extends Repository
     public function getNextRef()
     {
         return DB::table('noc_applicants')->max('ref') + 1;
+    }
+
+    /**
+     * @param Request $request
+     * @param array $columns
+     * @return LengthAwarePaginator
+     */
+    public function getPaginatedListGoodStanding(Request $request, $type, array $columns = array('*'))
+    {
+        $limit = $request->get('limit', config('app.per_page'));
+        return $this->model->newQuery()->when(!$request->has('status'), function ($query) {
+            $query->where('status', 'pending'); // Default condition for pending records
+        })->where('good_standing', true)->latest()
+
+        ->filter(new NocFilter($request))
+        ->paginate($limit);
     }
 }

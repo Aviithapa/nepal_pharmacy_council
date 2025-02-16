@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use ZipArchive;
 
 class NocController extends Controller
 {
@@ -53,7 +52,10 @@ class NocController extends Controller
         foreach ($statusCountsData as $status => $data) {
             $statusCounts[$status] = $data['count'];
         }
-        return view('admin.pages.cms.noc.index', compact('noc', 'request', 'statusCounts'));
+
+        $goodStanding = $this->nocApplicationRepository->getPaginatedListGoodStanding($request, 'good_standing');
+
+        return view('admin.pages.cms.noc.index', compact('noc', 'request', 'statusCounts','goodStanding'));
     }
 
     /**
@@ -226,9 +228,7 @@ class NocController extends Controller
             $imagePaths[] = asset('storage/noc/' . $userId . '/' . basename($image));
         }
 
-      
         $applicant = $this->nocApplicationRepository->findOrFail($userId);
- 
 
         // Load a PDF view and pass the image paths to it
         $pdf = PDF::loadView('pdf.images', ['images' => $imagePaths, 'userId' => $userId, 'applicant' => $applicant]);
