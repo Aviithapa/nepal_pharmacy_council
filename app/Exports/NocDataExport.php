@@ -9,57 +9,31 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class NocDataExport implements FromCollection, WithHeadings
 {
+    protected $status;
+
+    // Constructor to accept the status parameter
+    public function __construct($status)
+    {
+        $this->status = $status;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return NocApplication::where('good_standing', false)
-            ->get([
-                'first_name',
-                'middle_name',
-                'last_name',
-                'first_name_nepali',
-                'middle_name_nepali',
-                'last_name_nepali',
-                'title',
-                'dob_ad',
-                'dob_bs',
-                'father_name',
-                'mother_name',
-                'gender',
-                'citizenship',
-                'national_id',
-                'issued_district',
-                'district',
-                'municipality',
-                'ward',
-                'tole',
-                'slc_institute',
-                'slc_year',
-                'slc_grade',
-                'slc_reg_no',
-                'slc_remarks',
-                'plus2_institute',
-                'plus2_year',
-                'plus2_grade',
-                'plus2_reg_no',
-                'plus2_remarks',
-                'applied_college',
-                'applied_university',
-                'npc_enlisted',
-                'status',
-                'remarks',
-                'ref',
-                'position',
-                'registration_number',
-                'university',
-                'registrar_name',
-                'passed_year',
-                'email',
-                'created_at'
-            ])
-            ->transform(function ($noc) {
+            $status = $this->status;  // Assuming you're passing status from the controller to the export class
+        
+            $query = NocApplication::where('good_standing', false);
+        
+            // If the status is null, get all data
+            if ($status === null) {
+                $query = $query->get();
+            }else {
+                $query = $query->where('status', $status)->get();
+            }
+        
+            return $query->transform(function ($noc) {
                 return [
                     'first_name' => $noc->first_name,
                     'middle_name' => $noc->middle_name,
@@ -105,7 +79,7 @@ class NocDataExport implements FromCollection, WithHeadings
                     'created_at' => Carbon::parse($noc->created_at)->format('Y-m-d'), // Convert to YYYY-MM-DD
                 ];
             });
-    }
+        }
      
 
     public function headings(): array

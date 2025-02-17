@@ -228,12 +228,37 @@ class NocController extends Controller
             $imagePaths[] = asset('storage/noc/' . $userId . '/' . basename($image));
         }
 
-        $applicant = $this->nocApplicationRepository->findOrFail($userId);
+        $nocData = $applicant = $this->nocApplicationRepository->findOrFail($userId);
 
+       
+            $url = url($nocData->pdf_link);
+            $qrCode = QrCode::size(100)->generate($url);
+            $qrCodeBase64 = 'data:image/png;base64,' . base64_encode($qrCode);
+            $dobFormatted = Carbon::parse($nocData->dob_ad)->format('d M Y');
+
+            if($nocData->good_standing){
+                $pdf = Pdf::loadView('pdf.good_standing', [
+                    'nocData' => $nocData,
+                    'currentDate' => Carbon::now()->format('d-m-Y'),
+                    'qrCode' => $qrCodeBase64,
+                    'dob' => $dobFormatted,
+                    'images' => $imagePaths, 
+                    'userId' => $userId, 
+                    'applicant' => $applicant
+                ]);
+
+            }else{
+                $pdf = Pdf::loadView('pdf.noc_registration', [
+                    'nocData' => $nocData,
+                    'currentDate' => Carbon::now()->format('Y-m-d'),
+                    'qrCode' => $qrCodeBase64,
+                    'images' => $imagePaths, 'userId' => $userId, 'applicant' => $applicant
+                ]);
+            }
         // Load a PDF view and pass the image paths to it
-        $pdf = PDF::loadView('pdf.images', ['images' => $imagePaths, 'userId' => $userId, 'applicant' => $applicant]);
+        // $pdf = PDF::loadView('pdf.images', ['images' => $imagePaths, 'userId' => $userId, 'applicant' => $applicant]);
 
         // Return the generated PDF for download
-        return $pdf->download("images_{$userId}.pdf");
+        return $pdf->download("{$applicant->title}_{$applicant->first_name}_{$applicant->last_name}.pdf");
     }
 }
