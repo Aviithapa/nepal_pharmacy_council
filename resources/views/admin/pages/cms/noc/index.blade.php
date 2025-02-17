@@ -215,31 +215,31 @@
                                     <td>
                                         @if ($data->status === 'approved')
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
-                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
+                                                <span class="badge bg-purple-subtle text-purple" style="font-size: 18px; text-transform: capitalize;">View</span>
                                             </a>
                                             <a target="_blank" href="{{ getImage($data->pdf_link) }}">
-                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">Print</span>
+                                                <span class="badge bg-pink-subtle text-pink" style="font-size: 18px; text-transform: capitalize;">Print</span>
                                             </a>
                                             @if (Auth::user()->mainRole()->name === 'super_admin')
                                                 <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
-                                                    <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Re Generate</span>
+                                                    <span class="badge bg-pink-subtle text-pink" style="font-size: 18px; text-transform: capitalize;">Re Generate</span>
                                                 </a>
                                             @endif
                                             <a class="download" href="{{ url('download-images/' .$data->id) }}" data-status="download" style="cursor: pointer;">
-                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
+                                                <span class="badge bg-pink-subtle text-pink" style="font-size: 18px; text-transform: capitalize;">Download</span>
                                             </a>
                                             
                                         @else
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">
-                                                <span class="badge bg-info-subtle text-info" style="font-size: 18px; text-transform: capitalize;">View</span>
+                                                <span class="badge bg-purple-subtle  text-purple" style="font-size: 18px; text-transform: capitalize;">View</span>
                                             </a>
                                             @if (Auth::user()->mainRole()->name === 'super_admin')
                                             <a class="btn-approve" data-id="{{ $data->id }}" data-status="approved" style="cursor: pointer;">
-                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Approve</span>
+                                                <span class="badge bg-pink-subtle text-pink" style="font-size: 18px; text-transform: capitalize;">Approve</span>
                                             </a>
                                             @endif
                                             <a class="btn-reject" data-id="{{ $data->id }}" data-status="rejected" style="cursor: pointer;">
-                                                <span class="badge bg-danger-subtle text-danger" style="font-size: 18px; text-transform: capitalize;">Reject</span>
+                                                <span class="badge bg-pink-subtle text-pink" style="font-size: 18px; text-transform: capitalize;">Reject</span>
                                             </a>
                                         @endif
                                     </td>
