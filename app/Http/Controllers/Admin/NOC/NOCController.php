@@ -10,6 +10,7 @@ use App\Repositories\Media\MediaRepository;
 use App\Repositories\NocUser\NocApplicationRepository;
 use App\Repositories\User\UserRepository;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -57,7 +58,7 @@ class NOCController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateNocFormRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
         try {
