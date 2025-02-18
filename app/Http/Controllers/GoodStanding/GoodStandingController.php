@@ -91,7 +91,7 @@ class GoodStandingController extends Controller
                     $response = $this->fileUploader->upload($data[$field], 'noc/'.$banner->id);
                     $banner->{$field} = $response['path'];
                     $banner->save();
-                    $response['post_id'] = $banner->id;
+                    $response['noc_id'] = $banner->id;
                     $this->mediaRepository->store($response);
                 }
             }
@@ -157,7 +157,7 @@ class GoodStandingController extends Controller
                     $response = $this->fileUploader->upload($data[$field], 'noc/'.$banner->id);
                     $banner->{$field} = $response['path'];
                     $banner->save();
-                    $response['post_id'] = $banner->id;
+                    $response['noc_id'] = $banner->id;
                     $this->mediaRepository->store($response);
                 }
             }

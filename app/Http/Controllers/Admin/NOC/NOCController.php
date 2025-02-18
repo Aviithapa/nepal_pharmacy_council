@@ -58,7 +58,7 @@ class NOCController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateNocFormRequest $request)
     {
         $data = $request->all();
         try {
@@ -94,7 +94,7 @@ class NOCController extends Controller
                     $response = $this->fileUploader->upload($data[$field], 'noc/'.$banner->id);
                     $banner->{$field} = $response['path'];
                     $banner->save();
-                    $response['post_id'] = $banner->id;
+                    $response['noc_id'] = $banner->id;
                     $this->mediaRepository->store($response);
                 }
             }
@@ -168,7 +168,7 @@ class NOCController extends Controller
                     $response = $this->fileUploader->upload($data[$field], 'noc/'.$banner->id);
                     $banner->{$field} = $response['path'];
                     $banner->save();
-                    $response['post_id'] = $banner->id;
+                    $response['noc_id'] = $banner->id;
                     $this->mediaRepository->store($response);
                 }
             }
