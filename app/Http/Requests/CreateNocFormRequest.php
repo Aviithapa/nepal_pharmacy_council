@@ -57,19 +57,19 @@ class CreateNocFormRequest extends FormRequest
             'applied_university' => 'required|string|max:255',
             'npc_enlisted'    => 'required|in:yes,no',
 
-            'citizenship_front' => 'required|image|max:204800', // 200KB
-            'citizenship_back' => 'required|image|max:204800', // 200KB
-            'slc_marksheet' => 'required|image|max:204800',
-            'slc_provisional' => 'required|image|max:204800',
-            'slc_character' => 'required|image|max:204800',
-            'equivalence' => 'nullable|image|max:204800',
+           'citizenship_front' => 'required|image|max:1048576', // 1MB
+            'citizenship_back' => 'required|image|max:1048576', // 1MB
+            'slc_marksheet' => 'required|image|max:1048576', // 1MB
+            'slc_provisional' => 'required|image|max:1048576', // 1MB
+            'slc_character' => 'required|image|max:1048576', // 1MB
+            'equivalence' => 'nullable|image|max:1048576', // 1MB
 
-            'plus2_marksheet' => 'required|image|max:204800',
-            'plus2_provisional' => 'required|image|max:204800',
-            'plus2_character' => 'required|image|max:204800',
-            'plus2_equivalence' => 'nullable|image|max:204800',
+            'plus2_marksheet' => 'required|image|max:1048576', // 1MB
+            'plus2_provisional' => 'required|image|max:1048576', // 1MB
+            'plus2_character' => 'required|image|max:1048576', // 1MB
+            'plus2_equivalence' => 'nullable|image|max:1048576', // 1MB
 
-            'bank_voucher' => 'required|image|max:204800',
+            'bank_voucher' => 'required|image|max:1048576', // 1MB
 
         ];
     }
