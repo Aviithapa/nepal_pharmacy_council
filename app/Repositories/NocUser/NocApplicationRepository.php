@@ -35,12 +35,13 @@ class NocApplicationRepository extends Repository
         ->paginate($limit);
     }
 
-    public function getStatusCounts($statuses)
+    public function getStatusCounts($statuses, $status = false)
     {
         return $this->model
             ->select('status', DB::raw('count(*) as count'))
             ->whereIn('status', $statuses)
             ->groupBy('status')
+            ->where('good_standing', $status)
             ->get()
             ->keyBy('status')
             ->toArray();

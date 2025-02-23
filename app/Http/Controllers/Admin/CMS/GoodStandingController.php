@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class NocController extends Controller
+class GoodStandingController extends Controller
 {
 
     protected $nocApplicationRepository, $userRepository;
@@ -39,11 +39,11 @@ class NocController extends Controller
      */
     public function index(Request $request)
     {
-        $noc = $this->nocApplicationRepository->getPaginatedList($request, 'noc');
+     
         $statuses = ['pending', 'approved', 'rejected']; // Example statuses
 
         // Fetch counts from repository
-        $statusCountsData = $this->nocApplicationRepository->getStatusCounts($statuses);
+        $statusCountsData = $this->nocApplicationRepository->getStatusCounts($statuses, true);
         
         // Initialize result with zero counts
         $statusCounts = array_fill_keys($statuses, 0);
@@ -55,7 +55,7 @@ class NocController extends Controller
 
         $goodStanding = $this->nocApplicationRepository->getPaginatedListGoodStanding($request, 'good_standing');
 
-        return view('admin.pages.cms.noc.index', compact('noc', 'request', 'statusCounts','goodStanding'));
+        return view('admin.pages.cms.noc.good_index', compact( 'request', 'statusCounts','goodStanding'));
     }
 
     /**
@@ -80,7 +80,7 @@ class NocController extends Controller
     public function show(string $id)
     {
         $applicant = $this->nocApplicationRepository->findOrFail($id);
-        return view('admin.pages.cms.noc.show', compact('applicant'));
+        return view('admin.pages.cms.good_standing.show', compact('applicant'));
  
     }
 
@@ -110,7 +110,7 @@ class NocController extends Controller
 
             DB::commit();
             session()->flash('success', 'Noc Form has been updated successfully.');
-            return redirect()->route('noc-main.index');
+            return redirect()->route('good_standing.index');
         } catch (Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Oops! Something went wrong.' . $e);
@@ -174,9 +174,6 @@ class NocController extends Controller
     
             DB::commit();
             session()->flash('success', 'Noc Form has been submitted successfully.');
-            if($nocData->good_standing){
-            return redirect()->route('good-standing-main.index');
-            }
             return redirect()->route('noc-main.index');
         } catch (Exception $e) {
             DB::rollBack();

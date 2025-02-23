@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CMS\CodeOfConductController;
 use App\Http\Controllers\Admin\CMS\CollegeController;
 use App\Http\Controllers\Admin\CMS\CpdActivitesController;
 use App\Http\Controllers\Admin\CMS\GalleryController;
+use App\Http\Controllers\Admin\CMS\GoodStandingController as CMSGoodStandingController;
 use App\Http\Controllers\Admin\CMS\GuidelinesController;
 use App\Http\Controllers\Admin\CMS\MenuController;
 use App\Http\Controllers\Admin\CMS\NewsController;
@@ -55,6 +56,9 @@ Route::middleware(['auth', 'admin:admin,super_admin'])->group(function () {
     Route::resource('cms/regulations', RegulationsController::class)->only('index', 'store', 'destroy');
     Route::resource('cms/coc', CodeOfConductController::class)->only('index', 'store', 'destroy');
     Route::resource('cms/noc-main', CMSNocController::class)->only('index', 'show', 'update');
+
+    Route::resource('cms/good-standing-main', CMSGoodStandingController::class)->only('index', 'show', 'update');
+
     Route::put('cms/noc-approve/{id}', [CMSNocController::class, 'approve'])->name('noc.approve');
     Route::post('cms/store-data', [CMSNocController::class, 'storeData'])->name('applicant.store');
     Route::resource('inquiry', InquiryController::class)->only('index');
