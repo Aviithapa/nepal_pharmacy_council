@@ -9,6 +9,7 @@ use App\Repositories\Media\MediaRepository;
 use App\Repositories\NocUser\NocApplicationRepository;
 use App\Repositories\User\UserRepository;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -113,7 +114,7 @@ class GoodStandingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateGoodStandingRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $data = $request->all();
         try {
