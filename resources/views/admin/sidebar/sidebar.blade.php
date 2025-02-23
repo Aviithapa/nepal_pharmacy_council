@@ -116,10 +116,21 @@
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="{{ url('cms/noc-main') }}" class="side-nav-link">
-                            <i class="bi-gear"></i>
-                            <span> Noc Management </span>
+                        <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="bi-card-checklist"></i>
+                            <span> Noc / Good Standing </span>
+                            <span class="bi-caret-down-fill"></span>
                         </a>
+                        <div class="collapse" id="sidebarPages">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ url('cms/noc-main') }}">Noc Management</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('cms/good-standing-main') }}">Good standing </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li class="side-nav-item">
