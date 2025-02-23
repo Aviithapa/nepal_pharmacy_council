@@ -34,7 +34,7 @@
 </div>
 
 <div class="card">
-    <form action="{{ route('noc-main.index') }}" method="GET" novalidate>
+    <form action="{{ route('good-standing-main.index') }}" method="GET" novalidate>
         <div class="row" style="padding: 20px 10px 0px 10px;">
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="mb-3">
