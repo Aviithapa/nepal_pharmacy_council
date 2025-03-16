@@ -194,6 +194,9 @@ class NocController extends Controller
             session()->flash('danger', 'Oops! Something went wrong.');
             return redirect()->back()->withInput();
         }
+        if($nocData->good_standing){
+            return redirect()->route('good-standing-main.index');
+        }
         return redirect()->route('noc-main.index');
     }
     
