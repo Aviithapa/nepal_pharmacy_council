@@ -165,8 +165,8 @@
               +977-1-4790747
             </p>
             <p class="address_info">
-              Email: npc@nepalpharmmacycouncil.org.np,
-              registar@nepalpharmacycouncil.org.np
+              Email: npc@nepalpharmacycouncil.org.np,
+              registrar@nepalpharmacycouncil.org.np
             </p>
             <p>
               chairman@nepalpharmacycouncil.org.np,

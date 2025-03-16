@@ -388,7 +388,6 @@
                             name="ref" 
                             style="padding: 5px; font-size:16px;"
                             value="{{ old('ref', isset($applicant) ? $applicant->ref : '') }}" 
-                            {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
 
                         
                         >
@@ -428,7 +427,6 @@
                                 name="dob_ad" 
                                 style="padding: 5px; font-size:16px;"
                                 value="{{ old('dob_en', isset($applicant) ? $applicant->dob_ad : '') }}" 
-                                {{ isset($applicant) && ($applicant->status === 'approved') ? 'readonly' : '' }} 
 
                             >
                             @error('dob_ad')

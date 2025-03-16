@@ -51,15 +51,7 @@
                     </select>
                 </div>
             </div>
-            {{-- <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="mb-3">
-                    <select class="form-control" id="statusSelect" name="good_standing">
-                        <option value="" {{ request()->get('good_standing') === null ? 'selected' : '' }}>Select Type</option>
-                        <option value="1" {{ request()->get('good_standing') == 1 ? 'selected' : '' }}>Good Standing</option>
-                        <option value="0" {{ request()->get('good_standing') == 0 ? 'selected' : '' }}>NOC</option>
-                     </select>
-                </div>
-            </div> --}}
+            
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="validationCustom01" placeholder="Citizenship" name="citizenship" value="{{ request()->get('citizenship') }}">
