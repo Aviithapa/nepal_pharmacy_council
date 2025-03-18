@@ -16,17 +16,17 @@
 }
 
 .red{
-    background: #f73d4c !important;  
+    background: #fadadd !important;  
     color: white !important;
 }
 
 .green{
-    background: #4efc68 !important;  
+    background: #d2f6d8 !important;  
     color: white !important;
 }
 
 .blue{
-    background: #54e2fe !important;  
+    background: #aaeaf7 !important;  
     color: white !important;
 }
 
