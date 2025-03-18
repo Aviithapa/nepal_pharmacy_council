@@ -96,13 +96,13 @@
                                     <th>#</th>
                                     <th>Action</th>
                                     <th>Name</th>
+                                    <th>Status</th>
                                     <th>NPC Enlisted</th>
                                     <th>Type</th>
                                     <th>Applied Date</th>
                                     <th>Dob</th>
                                     <th>Citizenship</th>
                                     <th>Phone Number</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -147,13 +147,13 @@
                                         @endif
                                     </td>
                                     <td>{{ $data->title . ' ' . $data->first_name . ' ' . $data->middle_name . ' ' . $data->last_name }}</td>
+                                    <td>{{ $data->status }}</td>
                                     <td>{{ $data->npc_enlisted }}</td>
                                     <td><span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">{{ $data->good_standing ? 'Good Standing' : 'NOC' }}</span></td>
                                     <td>{{ \Carbon\Carbon::parse($data->created_at)->format('Y-m-d') }}                                    </td>
                                     <td>{{ $data->dob_ad . ' AD ' . $data->dob_bs . ' BS' }}</td>
                                     <td>{{ $data->citizenship }}</td>
                                     <td>{{ $data->user->email }}</td>
-                                    <td>{{ $data->status }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
