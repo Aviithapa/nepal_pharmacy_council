@@ -60,10 +60,7 @@ class NocApplicationRepository extends Repository
     public function getPaginatedListGoodStanding(Request $request, $type, array $columns = array('*'))
     {
         $limit = $request->get('limit', config('app.per_page'));
-        return $this->model->newQuery()->when(!$request->has('status'), function ($query) {
-            $query->where('status', 'pending'); // Default condition for pending records
-        })->where('good_standing', true)->latest()
-
+        return $this->model->newQuery()->where('good_standing', true)->latest()
         ->filter(new NocFilter($request))
         ->paginate($limit);
     }

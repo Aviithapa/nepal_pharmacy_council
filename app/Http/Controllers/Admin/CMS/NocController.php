@@ -100,7 +100,7 @@ class NocController extends Controller
         $data = $request->all();
         try {
             DB::beginTransaction();
-             $data['status'] = 'rejected'; // Default status
+            $data['status'] = 'rejected'; // Default status
             $data['remarks'] = $data['remarks'] ?? '';
             $banner = $this->nocApplicationRepository->update($id, $data);
             if ($banner === false) {
@@ -110,6 +110,11 @@ class NocController extends Controller
 
             DB::commit();
             session()->flash('success', 'Noc Form has been updated successfully.');
+            
+            $nocData = $this->nocApplicationRepository->findOrFail($id);
+            if($nocData->good_standing){
+                return redirect()->route('good-standing-main.index');
+            }
             return redirect()->route('noc-main.index');
         } catch (Exception $e) {
             DB::rollBack();
