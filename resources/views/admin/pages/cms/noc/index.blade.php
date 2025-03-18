@@ -15,6 +15,20 @@
     color: white !important;
 }
 
+.red{
+    background: #f73d4c !important;  
+    color: white !important;
+}
+
+.green{
+    background: #4efc68 !important;  
+    color: white !important;
+}
+
+.blue{
+    background: #54e2fe !important;  
+    color: white !important;
+}
 
 </style>
 <div class="row">
@@ -107,14 +121,18 @@
                             </thead>
                             <tbody>
                                 @foreach($noc as $index =>  $data)
-                                     
-                            
                                 @php
                                     $createdAt = \Carbon\Carbon::parse($data->created_at);
                                     $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
+                                  
+                                    $rowClass = $isRecent ? 'blink-row' : (
+                                        $data->status === 'approved' ? 'green' : 
+                                        ($data->status === 'rejected' ? 'red' : 'blue')
+                                    );
                                 @endphp
-                                <tr class="{{ $isRecent ? 'blink-row' : '' }}">
-                                    <td>{{ ++$index }}</td>
+
+                                <tr class="{{ $rowClass }}">        
+                                            <td>{{ ++$index }}</td>
                                     <td>
                                         @if ($data->status === 'approved')
                                             <a target="_blank" href="{{ route('noc-main.show', ['noc_main' => $data->id]) }}">

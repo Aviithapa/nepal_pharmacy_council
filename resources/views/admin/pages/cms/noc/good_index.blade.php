@@ -16,6 +16,21 @@
 }
 
 
+.red{
+    background: #f73d4c !important;  
+    color: white !important;
+}
+
+.green{
+    background: #4efc68 !important;  
+    color: white !important;
+}
+
+.blue{
+    background: #54e2fe !important;  
+    color: white !important;
+}
+
 </style>
 <div class="row">
     @foreach ($statusCounts as $status => $count)
@@ -106,8 +121,13 @@
                                 @php
                                     $createdAt = \Carbon\Carbon::parse($data->created_at);
                                     $isRecent = $createdAt->diffInDays(now()) <= 2; // Check if created_at is within 2 days
+                                
+                                    $rowClass = $isRecent ? 'blink-row' : (
+                                        $data->status === 'approved' ? 'green' : 
+                                        ($data->status === 'rejected' ? 'red' : 'blue')
+                                    );
                                 @endphp
-                                <tr class="{{ $isRecent ? 'blink-row' : '' }}">
+                                <tr class="{{ $rowClass }}">
                                     <td>{{ ++$index }}</td>
                                     <td>
                                         @if ($data->status === 'approved')
