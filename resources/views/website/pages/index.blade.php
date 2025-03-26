@@ -301,7 +301,7 @@
       </div>
 
       <div class="flex flex-col gap-10">
-        <div class="npc__messages-first">
+        {{-- <div class="npc__messages-first">
           <div class="npc__messages-first-container flex gap-8">
             <div class="npc__messages-cover order-2">
               <div class="npc__messages-cover-img">
@@ -320,7 +320,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
         <div class="npc__messages-second">
           <div class="npc__messages-second-container flex gap-8">
