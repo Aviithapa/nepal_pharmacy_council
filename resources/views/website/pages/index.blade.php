@@ -180,7 +180,7 @@
           <div class="npc__member-card flex flex-col items-center gap-1">
             <h2 class="npc__member-position">Chairman</h2>
             <div class="npc__member-dp">
-              <img src="{{ $chairman->getImageUrlAttribute() }}" alt="sanjeev pandey" />
+              <img src="{{ $chairman->getImageUrlAttribute() }}" alt="chairman" />
             </div>
             <p class="npc__member-name">{{ $chairman->title }}</p>
           </div>
