@@ -14,15 +14,11 @@ class TaskSeeder extends Seeder
     public function run(): void
     {
         $tasks = [
-            ['title' => 'Certificate Generation', 'children' => [
-                ['title' => 'Bachelor'],
-                ['title' => 'Diploma'],
-            ]],
+            ['title' => 'Certificate Generation Bachelor'],
+            ['title' => 'Certificate Generation Diploma'],
             ['title' => 'Registration Book Entry'],
-            ['title' => 'Update', 'children' => [
-                ['title' => 'Bachelor'],
-                ['title' => 'Diploma'],
-            ]],
+            ['title' => 'Update Bachelor'],
+            ['title' => 'Update Diploma'],
             ['title' => 'Online Record Maintenance'],
             ['title' => 'Letter Official Reply'],
             ['title' => 'Copy of Original'],
