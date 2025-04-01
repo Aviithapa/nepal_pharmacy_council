@@ -72,60 +72,68 @@
                                  </thead>
                                  <tbody>
                                     @foreach($data as $task)
-                                    @if($task->latestAssignment)  <!-- Only show tasks that have an assignment -->
                                     <tr>
                                         <td style="vertical-align: middle;">{{ $loop->iteration }}</td> <!-- Display the index number -->
                                         <td style="vertical-align: middle;">{{ $task->title }}</td> <!-- Task name -->
-                                        <td style="vertical-align: middle;">{{ $task->latestAssignment->assigned_at }}</td> <!-- Display the assignment date -->
-                                        <td style="vertical-align: middle;">
-                                            <input name="due_date_{{ $task->id }}" class="form-control" type="date" 
-                                            value="{{ $task->latestAssignment->due_date ? \Carbon\Carbon::parse($task->latestAssignment->due_date)->format('Y-m-d') : '' }}"/>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <select name="assigned_to_{{ $task->id }}" class="form-control">
-                                                @foreach($users as $user) <!-- Assuming you have a list of users -->
-                                                    <option value="{{ $user->id }}" 
-                                                        {{ $task->latestAssignment->assigned_to == $user->id ? 'selected' : '' }}>
-                                                        {{ $user->username }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            {{ $task->latestAssignment->status }}
-                                            {{-- <select name="status_{{ $task->id }}" class="form-control">
-                                                @php
-                                                    $statuses = ['working', 'pending', 'completed', 'failed'];
-                                                @endphp
-                                                @foreach($statuses as $status)
-                                                    <option value="{{ $status }}" {{ $task->latestAssignment->status === $status ? 'selected' : '' }}>
-                                                        {{ ucfirst($status) }}
-                                                    </option>
-                                                @endforeach
-                                            </select> --}}
-                                        </td> <!-- Task status -->
-                                        <td style="vertical-align: middle;">
-                                            <textarea name="description_{{ $task->id }}" class="form-control" rows="3">{{ $task->latestAssignment->description }}</textarea>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <button class="btn btn-warning btn-sm update-assignment" data-task-id="{{ $task->id }}">Update</button>
-                                            <a href="{{ url('workflow/tasks/completed/'. $task->latestAssignment->id) }}" class="btn btn-success btn-sm">Marked as Completed</a>
-                                            <a href="{{ url('workflow/tasks/'. $task->id) }}" class="btn btn-info btn-sm">View</a>
-                                        </td>
+                                
+                                        @if($task->latestAssignment)
+                                            <td style="vertical-align: middle;">{{ $task->latestAssignment->assigned_at }}</td> <!-- Display the assignment date -->
+                                            <td style="vertical-align: middle;">
+                                                <input name="due_date_{{ $task->id }}" class="form-control" type="date" 
+                                                    value="{{ $task->latestAssignment->due_date ? \Carbon\Carbon::parse($task->latestAssignment->due_date)->format('Y-m-d') : '' }}"/>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <select name="assigned_to_{{ $task->id }}" class="form-control">
+                                                    @foreach($users as $user)
+                                                        <option value="{{ $user->id }}" {{ $task->latestAssignment->assigned_to == $user->id ? 'selected' : '' }}>
+                                                            {{ $user->username }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                {{ $task->latestAssignment->status }}
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <textarea name="description_{{ $task->id }}" class="form-control" rows="3">{{ $task->latestAssignment->description }}</textarea>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <button class="btn btn-warning btn-sm update-assignment" data-task-id="{{ $task->id }}">Update</button>
+                                                <a href="{{ url('workflow/tasks/completed/'. $task->latestAssignment->id) }}" class="btn btn-success btn-sm">Mark as Completed</a>
+                                                <a href="{{ url('workflow/tasks/'. $task->id) }}" class="btn btn-info btn-sm">View</a>
+                                            </td>
+                                        @else
+                                            <td style="vertical-align: middle;">
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <input name="due_date_{{ $task->id }}" class="form-control" type="date" />
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <select name="assigned_to_{{ $task->id }}" class="form-control">
+                                                    @foreach($users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <select name="status_{{ $task->id }}" class="form-control">
+                                                    @foreach(['working', 'pending', 'completed', 'failed'] as $status)
+                                                        <option value="{{ $status }}">{{ ucfirst($status) }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <textarea name="description_{{ $task->id }}" class="form-control" rows="3"></textarea>
+                                            </td>
+                                            <td style="vertical-align: middle;">
+                                                <button class="btn btn-warning btn-sm update-assignment" data-task-id="{{ $task->id }}">Create Assignment</button>
+                                            </td>
+                                        @endif
                                     </tr>
-                                    @else
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>  <!-- Display the index number -->
-                                            <td>{{ $task->title }}</td>  <!-- Task name -->
-                                            <td colspan="6">No assignments available for this task.</td>
-                                        </tr>
-                                    @endif
                                 @endforeach
-                                 </tbody>
+                                
+                                </tbody>
                              </table>
-                                <div style="padding: 10px; float:right;">
-                             {{-- {{  $data->appends(request()->query())->links('admin.layout.pagination') }} --}}
-                             </div>
                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                  <div class="modal-dialog modal-sm">
                                      <div class="modal-content">
