@@ -27,7 +27,7 @@
 
                 <div class="d-flex justify-content-between">
                     <div class="p-2">
-                        <h6 class="mb-2" style="font-size: 18px;">Failed Tasks</h6>
+                        <h6 class="mb-2" style="font-size: 18px;">Overdue Tasks</h6>
                         <p style="font-size: 20px;">{{ $user->failed_tasks_count }}</p>
                     </div>
                 </div>
