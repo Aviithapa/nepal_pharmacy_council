@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\Settings\SiteSettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\GoodStanding\GoodStandingController;
+use App\Http\Controllers\WorkFlow\WorkFlowController;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
@@ -106,3 +107,12 @@ Route::post('news/approve/{id}', [NewsController::class, 'approve'])
 //NOC Normal User
 Route::resource('backend/noc', NOCController::class)->middleware(['auth']);
 Route::resource('backend/good-standing', GoodStandingController::class)->middleware(['auth']);
+
+
+Route::get('workflow', [WorkFlowController::class, 'index'])->middleware(['auth'])->name('dashboard.workflow');
+Route::put('tasks/{taskId}/assignment/update', [WorkFlowController::class, 'updateTaskAssignment'])->name('tasks.assignment.update');
+Route::get('workflow/tasks/{taskId}', [WorkFlowController::class, 'show'])->name('workflow.tasks.show');
+Route::get('workflow/users/{id}', [WorkFlowController::class, 'user'])->name('workflow.user.show');
+Route::get('/export-workflow', [WorkFlowController::class, 'exportWorkFlow'])->name('export.workflow');
+Route::get('workflow/tasks/completed/{taskId}', [WorkFlowController::class, 'completed'])->name('workflow.tasks.completed');
+Route::put('/tasks/{id}/update', [WorkFlowController::class, 'update'])->name('task.update');

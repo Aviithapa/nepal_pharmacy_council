@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\TaskAssignment;
 use App\Repositories\CMS\Post\PostRepository;
 use App\Repositories\Setting\SettingRepository;
 use App\Repositories\User\UserRepository;
@@ -33,7 +34,10 @@ class DashboardController extends Controller
         $settings = $this->settingRepository->all();
         switch ($role) {
             case 'admin':
-                return view('admin.dashboard.admin', compact('registrar', 'chairman', 'settings'));
+                $data = TaskAssignment::where('assigned_to', Auth::user()->id)
+                ->latest()
+                ->get();                
+                return view('admin.dashboard.admin', compact('registrar', 'chairman', 'settings', 'data'));
                 break;
             case 'super_admin':
                 return view('admin.dashboard.super-admin', compact('registrar', 'chairman', 'settings'));

@@ -133,13 +133,12 @@
                 </div>
             </li>
 
-
-            {{-- <li class="side-nav-item">
-                <a href="{{ url('cms/noc-main') }}" class="side-nav-link">
-                    <i class="bi-gear"></i>
-                    <span> Noc Management </span>
+            <li class="side-nav-item">
+                <a href="{{ route('dashboard.workflow') }}" class="side-nav-link">
+                    <i class="bi-funnel"></i>
+                    <span> Work Flow </span>
                 </a>
-            </li> --}}
+            </li>
 
             <li class="side-nav-item">
                 <a href="{{ route('dashboard.site-settings.index') }}" class="side-nav-link">

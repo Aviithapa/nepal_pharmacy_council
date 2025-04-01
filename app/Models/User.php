@@ -85,4 +85,9 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function taskAssignments()
+    {
+        return $this->hasMany(TaskAssignment::class, 'assigned_to');
+    }
 }
