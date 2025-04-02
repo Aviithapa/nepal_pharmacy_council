@@ -9,7 +9,7 @@
       <div style="padding: 20px; width:100%; display:flex; justify-content:center; align-items:center; ">
         <div class="flex flex-col items-center" style="background: #dee2e6; padding:50px;" >
           <div class="npc__form-title">
-            <h2>Apply for NOC / Good Standing Letter</h2>
+            <h2>Apply for NOC / Good Standing Letter / Specialization Update</h2>
           </div>
           <form action="{{ url('/verify-token') }}" method="POST"  class="flex flex-col gap-8">
             @if(session('success'))
