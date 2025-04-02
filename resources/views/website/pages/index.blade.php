@@ -79,6 +79,7 @@
         href="/noc-online"
         target="_blank"
         rel="noopener noreferrer"
+        style="height: 70px;"
         class="npc__quick-link {{ getBlinking('1') ? 'blinking-element' : '' }}  flex items-center justify-between"
       >
         <div class="npc__quick-link-title flex">
@@ -97,6 +98,7 @@
             href="https://nepalpharmacycouncil.org.np/kyp/public/"
             target="_blank"
             rel="noopener noreferrer"
+            style="height: 70px;"
             class="npc__quick-link {{ getBlinking('1') ? 'blinking-element' : '' }}  flex items-center justify-between"
           >
             <div class="npc__quick-link-title flex">
@@ -114,6 +116,7 @@
             href="https://onlinenameregistration.nepalpharmacycouncil.org.np/old_records/search_professional"
             target="_blank"
             rel="noopener noreferrer"
+            style="height: 70px;"
             class="npc__quick-link flex {{ getBlinking('3') ? 'blinking-element' : '' }}  items-center justify-between"
           >
             <div class="npc__quick-link-title flex">
@@ -154,6 +157,23 @@
                 <i class="fa-solid fa-square-poll-vertical"></i>
               </span>
               <h2 class="">Result</h2>
+            </div>
+            <span class="">
+              <i class="fa-solid fa-bars"></i>
+            </span>
+          </a>
+
+          <a
+            href="https://onlinenameregistration.nepalpharmacycouncil.org.np/admitcards"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="npc__quick-link flex {{ getBlinking('2') ? 'blinking-element' : '' }}  items-center justify-between"
+          >
+            <div class="npc__quick-link-title flex">
+              <span>
+                <i class="fa-solid fa-book"></i>
+              </span>
+              <h2 class="">Admit Card</h2>
             </div>
             <span class="">
               <i class="fa-solid fa-bars"></i>
