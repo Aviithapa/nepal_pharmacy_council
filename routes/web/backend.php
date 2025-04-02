@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CMS\GalleryController;
 use App\Http\Controllers\Admin\CMS\GoodStandingController as CMSGoodStandingController;
 use App\Http\Controllers\Admin\CMS\GuidelinesController;
 use App\Http\Controllers\Admin\CMS\MenuController;
+use App\Http\Controllers\Admin\CMS\MPharmacyController;
 use App\Http\Controllers\Admin\CMS\NewsController;
 use App\Http\Controllers\Admin\CMS\NocController as CMSNocController;
 use App\Http\Controllers\Admin\CMS\PageController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Admin\Count\CountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Inquiry\InquiryController;
+use App\Http\Controllers\Admin\Master\MPharmaController;
 use App\Http\Controllers\Admin\NOC\NOCController;
 use App\Http\Controllers\Admin\Settings\SiteSettingController;
 use App\Http\Controllers\Admin\UserController;
@@ -59,6 +61,8 @@ Route::middleware(['auth', 'admin:admin,super_admin'])->group(function () {
     Route::resource('cms/noc-main', CMSNocController::class)->only('index', 'show', 'update');
 
     Route::resource('cms/good-standing-main', CMSGoodStandingController::class)->only('index', 'show', 'update');
+    Route::resource('cms/m-phamacy', MPharmacyController::class)->only('index', 'show', 'update');
+    Route::put('cms/m-phamacy/{id}', [MPharmacyController::class, 'approve'])->name('m-phamacy.approve');
 
     Route::put('cms/noc-approve/{id}', [CMSNocController::class, 'approve'])->name('noc.approve');
     Route::post('cms/store-data', [CMSNocController::class, 'storeData'])->name('applicant.store');
@@ -107,6 +111,7 @@ Route::post('news/approve/{id}', [NewsController::class, 'approve'])
 //NOC Normal User
 Route::resource('backend/noc', NOCController::class)->middleware(['auth']);
 Route::resource('backend/good-standing', GoodStandingController::class)->middleware(['auth']);
+Route::resource('backend/m-pharma', MPharmaController::class)->middleware(['auth']);
 
 
 Route::get('workflow', [WorkFlowController::class, 'index'])->middleware(['auth'])->name('dashboard.workflow');

@@ -141,6 +141,13 @@
             </li>
 
             <li class="side-nav-item">
+                <a href="{{ url('cms/m-phamacy') }}" class="side-nav-link">
+                    <i class="bi-file"></i>
+                    <span> M. Pharma </span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
                 <a href="{{ route('dashboard.site-settings.index') }}" class="side-nav-link">
                     <i class="bi-gear"></i>
                     <span> Site Settings </span>

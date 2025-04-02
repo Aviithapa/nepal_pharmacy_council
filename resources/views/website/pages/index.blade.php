@@ -128,8 +128,7 @@
           </a>
           <!-- admit card  -->
           <a
-            href="https://onlinenameregistration.nepalpharmacycouncil.org.np/admitcards"
-            target="_blank"
+            href="/noc-online"
             rel="noopener noreferrer"
             class="npc__quick-link flex {{ getBlinking('2') ? 'blinking-element' : '' }}  items-center justify-between"
           >
@@ -137,7 +136,7 @@
               <span>
                 <i class="fa-solid fa-book"></i>
               </span>
-              <h2 class="">Admit Card</h2>
+              <h2 class="">Update Specialization <br /> (M. Pharma)</h2>
             </div>
             <span class="">
               <i class="fa-solid fa-bars"></i>

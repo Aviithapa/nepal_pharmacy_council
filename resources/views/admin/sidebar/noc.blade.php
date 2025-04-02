@@ -99,6 +99,13 @@
                 </a>
             </li>
 
+            <li class="side-nav-item">
+                <a href="{{ url('backend/m-pharma') }}" class="side-nav-link">
+                    <i class="bi-book"></i>
+                    <span> Specialization Update </span>
+                </a>
+            </li>
+
             
         </ul>
         <!--- End Sidemenu -->

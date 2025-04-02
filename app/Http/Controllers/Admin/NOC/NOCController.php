@@ -104,7 +104,6 @@ class NOCController extends Controller
             session()->flash('success', 'Noc Form has been submitted successfully.');
             return redirect()->route('noc.index');
         } catch (Exception $e) {
-            dd($e);
             DB::rollBack();
             session()->flash('error', 'Oops! Something went wrong.' . $e);
             return redirect()->back()->withInput();
