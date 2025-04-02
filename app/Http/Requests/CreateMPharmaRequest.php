@@ -77,7 +77,7 @@ class CreateMPharmaRequest extends FormRequest
             'experience_details' => 'nullable|image|max:204800',
 
             'npc_registration_number' => 'required',
-            'npc_registration_number' => 'required',
+            'npc_registration_date' => 'required',
 
             'master_working' => 'nullable|string',
             'pharm_specialization' => 'nullable|string'
