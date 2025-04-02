@@ -460,7 +460,7 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td>D. Pharmacy or Equivalent</td>
+                <td>Plus 2 or D. Pharmacy</td>
                 <td>
                     <input type="text" placeholder="Enter institute" name="plus2_institute"
                         value="{{ old('plus2_institute', isset($data) ? $data->plus2_institute : '') }}"
