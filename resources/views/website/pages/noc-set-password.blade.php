@@ -7,7 +7,7 @@
       <div style="padding: 20px; width:100%; display:flex; justify-content:center; align-items:center; ">
         <div class="flex flex-col items-center" style="background: #dee2e6; padding:50px;" >
           <div class="npc__form-title" style="margin-bottom: 25px;">
-            <h2>Apply for NOC / Good Standing Letter / Specialization Update</h2>
+            <h2>Reset Your System generated password</h2>
           </div>
           <h3 style="margin-bottom: 25px;">Reset Password</h3>
           <form action="{{ url('/set-password') }}" method="POST" class="flex flex-col gap-8">

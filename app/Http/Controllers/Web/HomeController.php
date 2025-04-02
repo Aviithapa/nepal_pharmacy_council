@@ -49,9 +49,10 @@ class HomeController extends BaseController
     }
 
 
-    public function slug($slug = null)
+    public function slug( Request $request, $slug = null)
     {
         $slug = $slug ? $slug : 'index';
+        $this->viewData['heading'] = $request->query('heading') ?? ''; // Get the 'param' from the query string
         $file_path = resource_path() . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'website/pages' . DIRECTORY_SEPARATOR . $slug . '.blade.php';
         $this->viewData['pageData'] = $this->postRepository->findBy('slug', $slug);
         $this->viewData['clients'] = $this->postRepository->all()->where('type', 'clients');

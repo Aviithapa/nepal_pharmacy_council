@@ -75,8 +75,10 @@
           class="npc__quick-links-wrapper flex flex-col justify-between"
         >
         <!-- NOc And Good Standing  -->
+        {{-- NOC / Good Standing Letter / Specialization Update --}}
+
         <a
-        href="/noc-online"
+        href="/noc-online?heading=NOC / Good Standing Letter"
         target="_blank"
         rel="noopener noreferrer"
         style="height: 70px;"
@@ -131,7 +133,7 @@
           </a>
           <!-- admit card  -->
           <a
-            href="/noc-online"
+            href="/noc-online?heading=Specialization Update"
             rel="noopener noreferrer"
             class="npc__quick-link flex {{ getBlinking('2') ? 'blinking-element' : '' }}  items-center justify-between"
           >
