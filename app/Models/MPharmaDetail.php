@@ -27,7 +27,7 @@ class MPharmaDetail extends Model
         'name_registration_of_npc_front', 'name_registration_of_npc_back',
         'master_in_pharmacy_transcript_front', 'master_in_pharmacy_transcript_back',
         'experience_details', 'status', 'remarks',
-        'pdf_link', 'ref', 'uuid', 'user_id'
+        'pdf_link', 'ref', 'uuid', 'user_id', 'master_working', 'pharm_specialization'
     ];
 
     public function user()

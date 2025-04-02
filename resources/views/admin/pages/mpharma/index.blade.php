@@ -25,7 +25,7 @@
     <div class="" style="padding: 15px; background: lightyellow; margin: 10px 0px; border-left: 4px solid yellow;">
         <p style="font-weight: 700; font-size:26px; color: black;">Specialization Update (M Pharmacy).</p>
 
-        Make sure you associate with correct details. Once the information is confirmed, it cannot be changed.
+        Make sure you associate with correct details. 
     </div>
 
     @isset($data)
@@ -239,7 +239,7 @@
 
         <!-- Issued District -->
         <div class="col-span-2">
-            <label for="issued_district">Issued District</label>
+            <label for="issued_district">Citizenship Issued District</label>
             <input type="text" name="issued_district" id="issued_district"
                 class="form-input w-full @error('issued_district') border-red-500 @enderror"
                 value="{{ old('issued_district', isset($data) ? $data->issued_district : '') }}"
@@ -288,6 +288,10 @@
                 <option value="Pharmaceutics"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmaceutics' ? 'selected' : '' }}>
                     Pharmaceutics</option>
+                
+                <option value="Pharmacognosy"
+                    {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmacognosy' ? 'selected' : '' }}>
+                    Pharmacognosy</option>
 
                 <option value="Clinical Pharmacy"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Clinical Pharmacy' ? 'selected' : '' }}>
@@ -303,7 +307,7 @@
 
                 <option value=" Pharmaceutical care"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmaceutical care' ? 'selected' : '' }}>
-                    Pharmaceutical care </option>
+                    Pharmaceutical Care </option>
 
                 <option value=" Pharmacology "
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmacology' ? 'selected' : '' }}>
@@ -315,6 +319,10 @@
                 <option value=" Drug Regulatory Affairs "
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Drug Regulatory Affairs' ? 'selected' : '' }}>
                     Drug Regulatory Affairs </option>
+
+                <option value="Post Baccalaureate Pharm D"
+                    {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Post Baccalaureate Pharm D' ? 'selected' : '' }}>
+                    Post Baccalaureate Pharm D</option>
 
             </select>
             @error('gender')
@@ -330,6 +338,17 @@
         <h1 class="col-span-3 text-center text-primary text-xl font-semibold uppercase">
             Address And Contact Detail of Working Place
         </h1>
+        <div class="col-span-1">
+            <label for="master_working">Name of Institution / University / Industry / Hospital / Regulatory Agency</label>
+            <input type="text" name="master_working" id="master_working"
+                class="form-input w-full @error('master_working') border-red-500 @enderror"
+                value="{{ old('master_working', isset($data) ? $data->district : '') }}"
+                {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved' ? 'readonly' : '') : '' }}
+                required>
+            @error('master_working')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
         <div class="col-span-1">
             <label for="district">District</label>
             <input type="text" name="district" id="district"
@@ -441,7 +460,7 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td>Plus 2 or Equivalent</td>
+                <td>D. Pharmacy or Equivalent</td>
                 <td>
                     <input type="text" placeholder="Enter institute" name="plus2_institute"
                         value="{{ old('plus2_institute', isset($data) ? $data->plus2_institute : '') }}"
@@ -489,7 +508,7 @@
             </tr>
             <tr>
                 <td>3</td>
-                <td>Bachelor or Equivalent</td>
+                <td>B. Pharmacy</td>
                 <td>
                     <input type="text" placeholder="Enter institute" name="bachelor_institute"
                         value="{{ old('bachelor_institute', isset($data) ? $data->bachelor_institute : '') }}"
@@ -533,7 +552,7 @@
             </tr>
             <tr>
                 <td>4</td>
-                <td>Master or Equivalent</td>
+                <td>M. Pharmacy or Equivalent</td>
                 <td>
                     <input type="text" placeholder="Enter institute" name="master_institute"
                         value="{{ old('master_institute', isset($data) ? $data->master_institute : '') }}"
