@@ -187,13 +187,6 @@
 </head>
 
 <body>
-    <div class="header_section" style=" margin-bottom: 1rem">
-        <div class="logo_img" style="width: 100%; height: 9rem">
-            <img style="width: 100%; height: 100%; object-fit: cover;"
-                src="{{ public_path('frontend/images/npc_letter_head.png') }}" alt="npc_logo" />
-        </div>
-    </div>
-    <div class="page-break"></div>
     <div style="padding: 20px;">
 
         <div class="col-lg-12 col-md-12">
@@ -345,7 +338,7 @@
         </div>
         @foreach ($images as $image)
             <div class="image-container">
-                <img src="{{ storage_path('app/public/noc/' . $userId . '/' . basename($image)) }}" alt="Image">
+                <img src="{{ storage_path('app/public/specialization/' . $userId . '/' . basename($image)) }}" alt="Image">
             </div>
         @endforeach
     </div>
