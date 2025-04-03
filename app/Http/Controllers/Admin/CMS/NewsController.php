@@ -188,9 +188,14 @@ class NewsController extends Controller
             $data['slug'] = generateSlug($data['title']);
             $news = $this->newsRepository->update($id, $data);
 
-            if ($data['files'] && count($data['files']) > 0) {
+            if (isset($data['files']) && count($data['files']) > 0) {
                 foreach ($data['files'] as $file) {
-                    $response =  $this->fileUploader->upload($file, "news");
+                    $response = $this->fileUploader->upload($file, "news");
+                    
+                    if ($response === false) {
+                        throw new Exception('File upload failed.');
+                    }
+
                     $response['news_id'] = $id;
                     $this->mediaRepository->store($response);
                 }
