@@ -186,14 +186,14 @@
     $(document).ready(function() {
         $('.btn-approve').on('click', function() {
             const id = $(this).data('id');
-            const url = '{{ route("m-phamacy.approve", ["id" => ":id", "status" => "approved"]) }}'.replace(':id', id);
+            const url = '{{ route("phamacy.approve", ["id" => ":id"]) }}'.replace(':id', id);
             $('#approveForm').attr('action', url);
             $('#approveModal').modal('show');
         });
 
         $('.btn-reject').on('click', function() {
             const id = $(this).data('id');
-            const url = '{{ route("noc-main.update", ["noc_main" => ":id", "status" => "rejected"]) }}'.replace(':id', id);
+            const url = '{{ route("phamacy.reject", ["id" => ":id"]) }}'.replace(':id', id);
             $('#rejectForm').attr('action', url);
             $('#rejectModal').modal('show');
         });

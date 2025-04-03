@@ -62,7 +62,9 @@ Route::middleware(['auth', 'admin:admin,super_admin'])->group(function () {
 
     Route::resource('cms/good-standing-main', CMSGoodStandingController::class)->only('index', 'show', 'update');
     Route::resource('cms/m-phamacy', MPharmacyController::class)->only('index', 'show', 'update');
-    Route::put('cms/m-phamacy/{id}', [MPharmacyController::class, 'approve'])->name('m-phamacy.approve');
+    Route::put('cms/m-phamacy/approve/{id}', [MPharmacyController::class, 'approve'])->name('phamacy.approve');
+    Route::put('cms/m-phamacy/reject/{id}', [MPharmacyController::class, 'reject'])->name('phamacy.reject');
+
 
     Route::put('cms/noc-approve/{id}', [CMSNocController::class, 'approve'])->name('noc.approve');
     Route::post('cms/store-data', [CMSNocController::class, 'storeData'])->name('applicant.store');

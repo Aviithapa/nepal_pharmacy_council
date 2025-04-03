@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Media\MediaRepository;
 use App\Repositories\MPharma\MPharmaRepository;
 use App\Repositories\User\UserRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MPharmacyController extends Controller
 {
@@ -49,7 +51,7 @@ class MPharmacyController extends Controller
     public function approve(Request $request, string $id)
     {
         $data = $request->all();
-        
+    
         try {
             DB::beginTransaction();
     
@@ -70,10 +72,40 @@ class MPharmacyController extends Controller
     
             DB::commit();
             session()->flash('success', 'M Pharma Details Form has been submitted successfully.');
-            if($nocData->good_standing){
-            return redirect()->route('good-standing-main.index');
+          
+            return redirect()->route('m-pharma.index');
+        } catch (Exception $e) {
+            DB::rollBack();
+            session()->flash('error', 'Oops! Something went wrong.' . $e);
+            return redirect()->back()->withInput();
+        }
+    }
+    
+    public function reject(Request $request, string $id)
+    {
+        $data = $request->all();
+    
+        try {
+            DB::beginTransaction();
+    
+            // Generate UUID
+            $data['uuid'] = \Ramsey\Uuid\Uuid::uuid4()->toString();
+    
+            // Get next auto-incremented ref from the database
+            $data['status'] = 'rejected'; // Default status
+            
+            $nocData = $this->mPharmaRepository->findOrFail($id);
+    
+    
+            $banner = $this->mPharmaRepository->update($id, $data);
+            if ($banner === false) {
+                session()->flash('danger', 'Oops! Something went wrong.');
+                return redirect()->back()->withInput();
             }
-            return redirect()->route('noc-main.index');
+    
+            DB::commit();
+            session()->flash('success', 'M Pharma Details Form has been submitted successfully.');
+            return redirect()->route('m-phamacy.index');
         } catch (Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Oops! Something went wrong.' . $e);

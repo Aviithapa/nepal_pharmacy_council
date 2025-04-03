@@ -76,11 +76,9 @@ class MPharmaController extends Controller
 
             foreach ($fileFields as $field) {
                 if (isset($data[$field])) {
-                    $response = $this->fileUploader->upload($data[$field], 'noc/'.$banner->id);
+                    $response = $this->fileUploader->upload($data[$field], 'specialization/'.$banner->id);
                     $banner->{$field} = $response['path'];
                     $banner->save();
-                    // $response['noc_id'] = $banner->id;
-                    // $this->mediaRepository->store($response);
                 }
             }
 
