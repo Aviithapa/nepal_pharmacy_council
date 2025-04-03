@@ -128,6 +128,10 @@
                                 <td>Working Details</td>
                                 <td>{{ $applicant->master_working }}</td>
                             </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td>{{ $applicant->user->email }}</td>
+                            </tr>
 
                         </table>
                     </div>
