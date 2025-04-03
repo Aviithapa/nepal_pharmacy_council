@@ -205,6 +205,7 @@ class NewsController extends Controller
             session()->flash('success', 'News has been updated successfully.');
             return redirect()->route('news.index');
         } catch (Exception $e) {
+            dd($e);
             DB::rollBack();
             session()->flash('danger', 'Oops! Something went wrong.' . $e);
             return redirect()->back()->withInput();
