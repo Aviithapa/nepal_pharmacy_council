@@ -107,6 +107,7 @@ Route::post('news/approve/{id}', [NewsController::class, 'approve'])
     });
 
     Route::get('/download-images/{userId}', [CMSNocController::class, 'downloadImages']);
+    Route::get('/mpharma-download-images/{userId}', [MPharmacyController::class, 'downloadImages']);
 
 
 

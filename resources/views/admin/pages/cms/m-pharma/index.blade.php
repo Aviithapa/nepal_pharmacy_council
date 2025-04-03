@@ -95,6 +95,10 @@
                                             <a class="download" href="{{ url('download-images/' .$data->id) }}" data-status="download" style="cursor: pointer;">
                                                 <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
                                             </a> --}}
+
+                                            <a class="download" href="{{ url('mpharma-download-images/' .$data->id) }}" data-status="download" style="cursor: pointer;">
+                                                <span class="badge bg-success-subtle text-success" style="font-size: 18px; text-transform: capitalize;">Download</span>
+                                            </a>
                                             
                                         @else
                                             <a target="_blank" href="{{ route('m-phamacy.show', ['m_phamacy' => $data->id]) }}">
