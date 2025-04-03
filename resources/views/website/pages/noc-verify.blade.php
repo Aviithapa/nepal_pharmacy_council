@@ -11,7 +11,7 @@
           <div class="npc__form-title">
             <h2>Verify Your Token</h2>
           </div>
-          <form action="{{ url('/verify-token?heading='.  $heading ) }}" method="POST"  class="flex flex-col gap-8">
+          <form action="{{ url('/verify-token' ) }}" method="POST"  class="flex flex-col gap-8">
             @if(session('success'))
                 <div class="notification success">
                     {{ session('success') }}
