@@ -253,6 +253,14 @@
                             <td>NPC Registration Date</td>
                             <td>{{ $applicant->npc_registration_number }}</td>
                         </tr>
+                        <tr>
+                            <td>Specialization</td>
+                            <td>{{ $applicant->pharm_specialization }}</td>
+                        </tr>
+                        <tr>
+                            <td>Working Details</td>
+                            <td>{{ $applicant->master_working }}</td>
+                        </tr>
 
                     </table>
                 </div>
