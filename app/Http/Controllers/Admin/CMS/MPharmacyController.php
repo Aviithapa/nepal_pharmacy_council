@@ -76,7 +76,7 @@ class MPharmacyController extends Controller
             DB::commit();
             session()->flash('success', 'M Pharma Details Form has been submitted successfully.');
           
-            return redirect()->route('m-pharma.index');
+            return redirect()->route('m-phamacy.index');
         } catch (Exception $e) {
             DB::rollBack();
             session()->flash('error', 'Oops! Something went wrong.' . $e);
