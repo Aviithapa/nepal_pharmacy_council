@@ -25,7 +25,7 @@
     <div class="" style="padding: 15px; background: lightyellow; margin: 10px 0px; border-left: 4px solid yellow;">
         <p style="font-weight: 700; font-size:26px; color: black;">Specialization Update (M Pharmacy).</p>
 
-        Make sure you associate with correct details. 
+        Make sure you associate with correct details.
     </div>
 
     @isset($data)
@@ -278,9 +278,7 @@
         <div class="col-span-2">
             <label for="pharm_specialization">M. Pharm Specialization</label>
             <select name="pharm_specialization" id="pharm_specialization"
-                class="form-select w-full @error('gender') border-red-500 @enderror"
-                {{-- {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved' ? 'disabled' : '') : '' }} --}}
-                required>
+                class="form-select w-full @error('gender') border-red-500 @enderror" {{-- {{ isset($data) ? ($data->status === 'pending' || $data->status === 'approved' ? 'disabled' : '') : '' }} --}} required>
                 <option value="">Select M. Pharm Specialization</option>
                 <option value="Pharmaceutical Chemistry"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmaceutical Chemistry' ? 'selected' : '' }}>
@@ -288,7 +286,7 @@
                 <option value="Pharmaceutics"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmaceutics' ? 'selected' : '' }}>
                     Pharmaceutics</option>
-                
+
                 <option value="Pharmacognosy"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Pharmacognosy' ? 'selected' : '' }}>
                     Pharmacognosy</option>
@@ -323,6 +321,10 @@
                 <option value="Post Baccalaureate Pharm D"
                     {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Post Baccalaureate Pharm D' ? 'selected' : '' }}>
                     Post Baccalaureate Pharm D</option>
+
+                <option value="Natural Product Chemistry CNP"
+                    {{ old('pharm_specialization', isset($data) ? $data->pharm_specialization : '') == 'Natural Product Chemistry CNP' ? 'selected' : '' }}>
+                    Natural Product Chemistry CNP</option>
 
             </select>
             @error('gender')
