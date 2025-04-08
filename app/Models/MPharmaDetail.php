@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Infrastructure\Traits\HasFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MPharmaDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasFilter;
 
     protected $table = 'm_pharma_details';
 

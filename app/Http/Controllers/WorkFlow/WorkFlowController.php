@@ -35,26 +35,42 @@ class WorkFlowController extends Controller
     {
         // Validate the incoming request
         $request->validate([
-            'assigned_to' => 'required|exists:users,id', // Ensure user exists
-            'description' => 'nullable|string', // Ensure description is valid
-            'due_date'   => 'required|date'
+            'assigned_to' => 'required|exists:users,id',
+            'description' => 'nullable|string',
+            'due_date'    => 'required|date',
+            'status'      => 'nullable|string'
         ]);
 
         // Find the task
         $task = Task::findOrFail($taskId);
 
-        // Create a new task assignment
-        $taskAssignment = new TaskAssignment();
-        $taskAssignment->task_id = $task->id;
-        $taskAssignment->assigned_to = $request->input('assigned_to');
-        $taskAssignment->assigned_at = now();
-        $taskAssignment->due_date = $request->input('due_date', ''); 
-        $taskAssignment->status = $request->input('status'); // You can set a default status
-        $taskAssignment->description = $request->input('description', ''); // Default to empty if no description
-        $taskAssignment->save();
+        // Get the latest task assignment
+        $latestAssignment = TaskAssignment::where('task_id', $task->id)
+                                ->latest()
+                                ->first();
 
-        // Return a success response
-        return response()->json(['success' => true, 'message' => 'Task assignment updated successfully']);
+        // Check if assigned_to has changed
+        if (!$latestAssignment || $latestAssignment->assigned_to != $request->assigned_to) {
+            // Create new task assignment
+            $taskAssignment = new TaskAssignment();
+            $taskAssignment->task_id = $task->id;
+            $taskAssignment->assigned_to = $request->assigned_to;
+            $taskAssignment->assigned_at = now();
+            $taskAssignment->due_date = $request->due_date;
+            $taskAssignment->status = $request->input('status', 'Pending'); // default status
+            $taskAssignment->description = $request->input('description', '');
+            $taskAssignment->save();
+
+            return response()->json(['success' => true, 'message' => 'Task reassigned successfully.']);
+        } else {
+            // Update existing assignment
+            $latestAssignment->due_date = $request->due_date;
+            $latestAssignment->status = $request->input('status', $latestAssignment->status);
+            $latestAssignment->description = $request->input('description', $latestAssignment->description);
+            $latestAssignment->save();
+
+            return response()->json(['success' => true, 'message' => 'Task assignment updated successfully.']);
+        }
     }
 
     public function show($id){

@@ -29,7 +29,7 @@ class MPharmaRepository extends Repository
     {
         $limit = $request->get('limit', config('app.per_page'));
         return $this->model->newQuery()->latest()
-        // ->filter(new NocFilter($request))
+        ->filter(new MPharmaFilter($request))
         ->paginate($limit);
     }
 

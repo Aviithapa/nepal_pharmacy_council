@@ -39,6 +39,7 @@ class MPharmacyController extends Controller
     public function index(Request $request)
     {
         $datas = $this->mPharmaRepository->getPaginatedList($request, 'no');
+        // dd($datas);
         return view('admin.pages.cms.m-pharma.index', compact('datas'));
     }
 

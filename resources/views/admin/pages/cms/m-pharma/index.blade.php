@@ -33,6 +33,35 @@
 </style>
 
 
+<div class="card">
+    <form action="{{ route('m-phamacy.index') }}" method="GET" novalidate>
+        <div class="row" style="padding: 20px 10px 0px 10px;">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="validationCustom01" placeholder="Name" name="keyword" value="{{ request()->get('keyword') }}">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="mb-3">
+                    <select class="form-control" id="statusSelect" name="status">
+                        <option value="" {{ request()->get('status') === null ? 'selected' : '' }}>Select Status</option>
+                        <option value="approved" {{ request()->get('status') === 'approved' ? 'selected' : '' }}>Approved</option>
+                        <option value="rejected" {{ request()->get('status') === 'rejected' ? 'selected' : '' }}>Rejected</option>
+                        <option value="pending" {{ request()->get('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="validationCustom01" placeholder="NPC Registration Number" name="npc_registration_number" value="{{ request()->get('npc_registration_number') }}">
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-6">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <div class="row">
 
@@ -47,7 +76,8 @@
                         <button type="submit"  class="btn btn-primary" style="color: white;">Export Data Noc</button>
                         </form> --}}
                     </div>
-                    <h5 class="header-title mb-0">Specialization List (M. Pharma)</h5>
+                    <h5 class="header-title mb-0">Specialization List (M. Pharma) </h5>
+                    <p>{{ $datas->total() }}</p>
                 </div>
 
                 <div id="yearly-sales-collapse" class="collapse show">
