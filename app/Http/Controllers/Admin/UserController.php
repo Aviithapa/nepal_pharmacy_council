@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-
     protected $userRepository;
 
     public function __construct(UserRepository $userRepository)
@@ -39,7 +38,6 @@ class UserController extends Controller
         $roles = Role::all();
         return view('admin.pages.user.create', compact('roles'));
     }
-
 
     public function store(AdminUserCreateRequest $request)
     {
@@ -85,6 +83,11 @@ class UserController extends Controller
     public function update(UserUpdateRequest $userUpdateRequest, $id)
     {
         $data = $userUpdateRequest->all();
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
+        // dd($data);
+
         try {
             $role = Role::where('name', $data['role'])->first();
             $user = $this->userRepository->update($id, $data);

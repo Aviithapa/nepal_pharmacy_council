@@ -89,7 +89,7 @@
                                                             <td>{{ $user->id }}</td>
                                                             <td>{{ $user->username }}</td>
                                                             <td>{{ $user->email }}</td>
-                                                            <td>{{ $user->mainRole()->name }}</td>
+                                                            <td>{{ isset($user->mainRole()->name) }}</td>
                                                             <td>
                                                                <span class="red-square" style="width: 20px; height: 10px; background-color: {{ $user->status ? 'green' : 'red' }}; display: inline-block;"></span>
                                                             </td>

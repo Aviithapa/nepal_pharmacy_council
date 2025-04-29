@@ -26,6 +26,7 @@ class UserRepository extends Repository
      */
     public function getPaginatedList(Request $request, $type, array $columns = array('*'))
     {
+        // dd($request->all());
         $limit = $request->get('limit', config('app.per_page'));
         return $this->model->newQuery()
             ->filter(new UserFilter($request))

@@ -114,7 +114,7 @@
                     <span> Dashboard </span>
                 </a>
             </li>
-
+{{-- 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
                     <i class="bi-card-checklist"></i>
@@ -131,7 +131,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
 
             <li class="side-nav-item">
                 <a href="{{ route('dashboard.workflow') }}" class="side-nav-link">
@@ -140,12 +140,12 @@
                 </a>
             </li>
 
-            <li class="side-nav-item">
+            {{-- <li class="side-nav-item">
                 <a href="{{ url('cms/m-phamacy') }}" class="side-nav-link">
                     <i class="bi-file"></i>
                     <span> M. Pharma </span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="side-nav-item">
                 <a href="{{ route('dashboard.site-settings.index') }}" class="side-nav-link">
